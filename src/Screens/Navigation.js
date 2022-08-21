@@ -3,6 +3,7 @@ import React from 'react'
 import Login from './Auth/Login'
 import SignUp from './Auth/SignUp'
 import Home from './Frontend/Home'
+import ImagePicker from './ImagePicker'
 import ForgetPassword from './Auth/ForgetPassword'
 import { NavigationContainer } from '@react-navigation/native';
 import { useAuthContext } from '../contexts/AuthContext'
@@ -29,9 +30,10 @@ export default function Navigation() {
 
             <NavigationContainer>
 
-                <Stack.Navigator initialRouteName='signUp'>
+                <Stack.Navigator initialRouteName='imagePicker'>
                     {!isAuthenticated
                         ? <Stack.Group screenOptions={{ headerShown: false }}>
+                            <Stack.Screen name='imagePicker' component={ImagePicker}/>
                             <Stack.Screen name='login' component={Login} />
                             <Stack.Screen name='signUp' component={SignUp} />
                             <Stack.Screen name='forgetPassword' component={ForgetPassword} />
