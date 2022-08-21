@@ -10,15 +10,16 @@ import {
   View,
 } from 'react-native';
 import Navigation from './src/Screens/Navigation';
+import { NavigationContainer } from '@react-navigation/native';
 
 
 
 const App = () => {
 
   return (
-    <SafeAreaView >
+
       <Navigation />
-    </SafeAreaView>
+    
   );
 };
 
