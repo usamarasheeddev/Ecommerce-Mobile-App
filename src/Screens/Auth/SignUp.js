@@ -2,18 +2,47 @@
 import { View, Text, StyleSheet, ImageBackground, Button } from 'react-native'
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
+import { useAuthContext } from '../../contexts/AuthContext';
+import auth from '@react-native-firebase/auth';
 
-
-
+const initialState = { email: '', password: '' }
 export default function SignUp({ navigation }) {
   const [userCreds, setUserCreds] = React.useState("");
-  
+  const { dispatch } = useAuthContext
+  const [state, setState] = React.useState(initialState)
 
+  const handleChange = (name, value) => {
+    setState(s => ({ ...s, [name]: value }))
+
+  }
 
   const handleSignUp = () => {
-    console.log("hello")
-    console.log(userCreds)
+    let { email, password} = state
+    if (!email) return alert("Email is invalid")
+    if (!password) return alert("Password is invalid")
+    // if (!username) return alert("Username is invalid")
+
+    auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user
+
+        dispatch({ type: "LOGIN", payload: { user } })
+        console.log('User account created  !');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
+
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
+
+        console.error(error);
+      })
   }
+
 
   return (
 
@@ -31,27 +60,27 @@ export default function SignUp({ navigation }) {
             label="Email"
             // value={text}
             name="email"
-            onChangeText={text => setUserCreds(s => ({ ...s, userEmail: text }))}
+            onChangeText={value => handleChange("email", value)}
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'
           />
-          <TextInput
+          {/* <TextInput
             style={{ marginTop: 10 }}
             mode="outlined"
             label="Username"
             // value={text}
             name="username"
-            onChangeText={text => setUserCreds(s => ({ ...s, username: text }))}
+            onChangeText={value => handleChange("username", value)}
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'
-          />
+          /> */}
           <TextInput
             style={{ marginTop: 10 }}
             mode="outlined"
             label="Password"
             // value={text}
             name="password"
-            onChangeText={text => setUserCreds(s => ({ ...s, userPassword: text }))}
+            onChangeText={value => handleChange("password", value)}
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'
             secureTextEntry

@@ -11,15 +11,18 @@ import {
 } from 'react-native';
 import Navigation from './src/Screens/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
+import AuthContextProvider from './src/contexts/AuthContext';
 
 
 
 const App = () => {
 
   return (
+    <AuthContextProvider>
 
       <Navigation />
-    
+    </AuthContextProvider>
+
   );
 };
 
