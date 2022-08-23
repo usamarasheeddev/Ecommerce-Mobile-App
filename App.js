@@ -1,27 +1,19 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
+  StyleSheet
 } from 'react-native';
-import HomeNavigation from './src/Screens/HomeNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthContextProvider from './src/contexts/AuthContext';
-import BottomTab from './src/Screens/BottomTabScreens/BottomTab';
-
+import ScreensNavigator from './src/Screens/ScreensNavigator';
 
 const App = () => {
 
   return (
     <AuthContextProvider>
       <NavigationContainer>
+        <ScreensNavigator />
 
-        <BottomTab />
       </NavigationContainer>
     </AuthContextProvider>
 

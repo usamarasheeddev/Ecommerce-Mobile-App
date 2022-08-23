@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
 import React from 'react'
-import Login from './Auth/Login'
-import SignUp from './Auth/SignUp'
+import Login from './AuthScreens/Login'
+import SignUp from './AuthScreens/SignUp'
 import Home from './Frontend/Home/Home'
 import ImagePicker from './ImagePicker'
-import ForgetPassword from './Auth/ForgetPassword'
+import ForgetPassword from './AuthScreens/ForgetPassword'
 import { NavigationContainer } from '@react-navigation/native';
 import { useAuthContext } from '../contexts/AuthContext'
 import auth from '@react-native-firebase/auth';
