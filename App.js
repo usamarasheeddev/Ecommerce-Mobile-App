@@ -9,18 +9,20 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Navigation from './src/Screens/Navigation';
+import HomeNavigation from './src/Screens/HomeNavigation';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthContextProvider from './src/contexts/AuthContext';
-
+import BottomTab from './src/Screens/BottomTabScreens/BottomTab';
 
 
 const App = () => {
 
   return (
     <AuthContextProvider>
+      <NavigationContainer>
 
-      <Navigation />
+        <BottomTab />
+      </NavigationContainer>
     </AuthContextProvider>
 
   );
