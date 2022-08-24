@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -6,25 +6,70 @@ import FavuriteItems from './FavuriteItems/FavuriteItems';
 import UserCart from './Cart/UserCart';
 import HomeScreenNavigator from '../Frontend/HomeScreenNavigator';
 import SearchTab from './SearchTab.js/SearchTab';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Home from 'react-native-vector-icons/SimpleLineIcons'
+import Heart from 'react-native-vector-icons/SimpleLineIcons'
+import Search from 'react-native-vector-icons/Ionicons'
+import Bag from 'react-native-vector-icons/SimpleLineIcons'
 
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTab() {
     return (
-        <Tab.Navigator initialRouteName='Home'>
-            <Tab.Group
-                screenOptions={{ tabBarShowLabel:false }}>
+        <Tab.Navigator initialRouteName='Home'
+            screenOptions={{
+                //bottom tab styling
+                tabBarStyle: {
+                    // backgroundColor:'black',
+                    position: "absolute",
+                    bottom: 15,
+                    height: 60,
+                    borderRadius: 10,
+                    width: 320,
+                    marginHorizontal: 19,
+                    // shasdow
+                    shadowColor: "#000",
+                    shadowOpacity: 0.5,
+                    shadowOffset: {
+                        width: 10,
+                        height: 10,
+                    }
 
-                <Tab.Screen name='Home' component={HomeScreenNavigator}  
-                options={{
-                    tabBarIcon:(({color}) => <Icon name='home-outline' color={color} size={26} />)
-                }}
+                }
+            }}
+        >
+
+            {/* BottomTabS */}
+            <Tab.Group
+                screenOptions={{ tabBarShowLabel: false }}>
+
+                <Tab.Screen name='Home' component={HomeScreenNavigator}
+
+                    options={{
+                        headerShown: false,
+                        tabBarIcon: (({ color }) => <Home name='home' color={color} size={25} />)
+                    }}
                 />
-                <Tab.Screen name='Favurite Item' component={FavuriteItems} />
-                <Tab.Screen name='Search' component={SearchTab} />
-                <Tab.Screen name='Cart' component={UserCart} />
+                <Tab.Screen name='Favurite Item' component={FavuriteItems}
+                    options={{
+                        tabBarIcon: (({ color }) => <Heart name='heart' color={color} size={25} />),
+                        tabBarActiveTintColor: 'red'
+                    }}
+                />
+
+                <Tab.Screen name='Search' component={SearchTab}
+                    options={{
+                        tabBarIcon: (({ color }) => <Search name='search-outline' size={30} color={color} />)
+                    }}
+                />
+
+                <Tab.Screen name='Cart' component={UserCart}
+
+                    options={{
+
+                        tabBarIcon: (({ color }) => <Bag name='bag' size={25} color={color} />)
+                    }} />
             </Tab.Group>
         </Tab.Navigator>
 

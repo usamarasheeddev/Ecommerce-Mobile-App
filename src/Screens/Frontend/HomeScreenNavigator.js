@@ -14,7 +14,7 @@ export default function HomeScreenNavigator() {
                 <Stack.Group screenOptions={{
                     headerTitleAlign: 'center'
                 }}>
-                    <Stack.Screen name='HomePage' component={Home} />
+                    <Stack.Screen name='HomePage' component={Home} options={{ headerShown: false }} />
                     <Stack.Screen name='ProductDetails' component={ProdutcDetailsScreen}
                         options={{ title: "Details" }}
                     />
