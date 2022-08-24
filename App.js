@@ -1,20 +1,27 @@
-
+// import 'react-native-gesture-handler';
 import React from 'react';
 import {
   StyleSheet
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthContextProvider from './src/contexts/AuthContext';
+import CartContextProvider from './src/contexts/CartContext';
 import ScreensNavigator from './src/Screens/ScreensNavigator';
+import ProductsContextProvider from './src/contexts/ProductsContext';
 
 const App = () => {
 
   return (
     <AuthContextProvider>
-      <NavigationContainer>
-        <ScreensNavigator />
+      <ProductsContextProvider>
+        <CartContextProvider>
+          <NavigationContainer>
 
-      </NavigationContainer>
+            <ScreensNavigator />
+
+          </NavigationContainer>
+        </CartContextProvider>
+      </ProductsContextProvider>
     </AuthContextProvider>
 
   );

@@ -1,10 +1,17 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { styles } from './styles'
+import { useCartContext } from '../../../contexts/CartContext'
 
 export default function ProdutcDetailsScreen({ navigation, route }) {
     const { item } = route.params
+    const { setCartItems } = useCartContext()
 
+
+    const addToCart = (item) => {
+        // alert(item.title)
+        setCartItems(s => ([...s, item]))
+    }
 
     return (
         <ScrollView>
@@ -15,7 +22,7 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
                         source={{
                             uri: item.url
                         }}
-                        style={{ flex: 1, width: "100%", borderRadius: 20, height: 500, objectFit: "cover", marginTop: 2, resizeMode: 'cover' }}
+                        style={{ flex: 1, width: "100%", borderRadius: 20, height: 370, resizeMode : 'contain', marginTop: 2, resizeMode: 'contain' }}
 
                     />
                     <View style={styles.textBox}>
@@ -25,7 +32,7 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
                             .join(' ')}</Text>
                         {/* <Text style={styles.text}>$200</Text> */}
                         <Text style={{
-                            color: 'black', fontSize: 20, marginTop: 35,marginBottom:20
+                            color: 'black', fontSize: 18, marginTop: 10, marginBottom: 20
                         }}>Details</Text>
 
                         <Text style={styles.text}>{item.details}</Text>
@@ -34,11 +41,11 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
 
 
                 <View style={styles.buttonBox}>
-                    <Text style={{padding:8,fontSize:20}}>$200</Text>
+                    <Text style={{ padding: 8, fontSize: 18 }}>$200</Text>
                     <TouchableOpacity style={styles.button}
-                   
+                        onPress={() => addToCart(item)}
                     >
-                        <Text style={{ textAlign: "center",color:'white' }}> Add To Cart</Text>
+                        <Text style={{ textAlign: "center", color: 'white' }}> Add To Cart</Text>
                     </TouchableOpacity>
                 </View>
 

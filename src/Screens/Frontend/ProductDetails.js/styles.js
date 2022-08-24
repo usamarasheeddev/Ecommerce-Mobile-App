@@ -2,11 +2,10 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     flexContainer: {
         flex: 1,
-        // alignItems:"center",
-        // justifyContent:'center'
+        marginBottom:80
     },
     heading: {
-        fontSize: 21,
+        fontSize: 18,
         fontWeight:"600",
         color:"black",
         fontFamily:"roboto"

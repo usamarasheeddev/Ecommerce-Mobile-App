@@ -9,7 +9,7 @@ export const styles=StyleSheet.create({
       },
       headigStyle: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 18
       },
       box: {
         // backgroundColor: "#38b000",
@@ -28,10 +28,10 @@ export const styles=StyleSheet.create({
     
       },
       shadowProp: {
-        shadowOffset: { width: -2, height: 4 },
-        shadowColor: '#171717',
+        shadowColor: '#000',
+        shadowOffset: { width: 2, height: 4 },
         shadowOpacity: 0.2,
-        shadowRadius: 3,
+        // shadowRadius: 3,
     
       },
 })

@@ -15,9 +15,9 @@ import Bag from 'react-native-vector-icons/SimpleLineIcons'
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTab() {
+export default function BottomTabScreen() {
     return (
-        <Tab.Navigator initialRouteName='Home'
+        <Tab.Navigator initialRouteName='Cart'
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {
