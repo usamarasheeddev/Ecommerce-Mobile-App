@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
         fontFamily:"roboto"
         
     },
+   
     textBox: {
         margin: 15
     },

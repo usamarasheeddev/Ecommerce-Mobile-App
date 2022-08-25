@@ -6,6 +6,7 @@ import FavuriteItems from './FavuriteItems/FavuriteItems';
 import UserCart from './Cart/UserCart';
 import HomeScreenNavigator from '../Frontend/HomeScreenNavigator';
 import SearchTab from './SearchTab.js/SearchTab';
+import CartScreensNavigator from './Cart/CartScreensNavigator';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Home from 'react-native-vector-icons/SimpleLineIcons'
 import Heart from 'react-native-vector-icons/SimpleLineIcons'
@@ -17,7 +18,7 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTabScreen() {
     return (
-        <Tab.Navigator initialRouteName='Cart'
+        <Tab.Navigator initialRouteName='UserCart'
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {
@@ -64,11 +65,12 @@ export default function BottomTabScreen() {
                     }}
                 />
 
-                <Tab.Screen name='Cart' component={UserCart}
+                <Tab.Screen name='UserCart' component={CartScreensNavigator}
 
                     options={{
 
-                        tabBarIcon: (({ color }) => <Bag name='bag' size={25} color={color} />)
+                        tabBarIcon: (({ color }) => <Bag name='bag' size={25} color={color} />),
+                        headerShown:false,
                     }} />
             </Tab.Group>
         </Tab.Navigator>

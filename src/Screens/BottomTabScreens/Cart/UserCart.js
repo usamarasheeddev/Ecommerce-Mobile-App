@@ -1,13 +1,21 @@
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, ScrollView, Button, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { useCartContext } from '../../../contexts/CartContext'
+import { styles } from './style'
 import Icon from 'react-native-vector-icons/Entypo'
+import UserCredsScreen from './UserCredsScreen'
 
-export default function UserCart() {
+export default function UserCart({ navigation }) {
   const { cartItems, setCartItems } = useCartContext()
+
+
   return (
     <ScrollView>
+
       <View style={{ flex: 1 }}>
+
+
+
         {
           cartItems.map((item) => {
             return <View style={styles.cartItem}>
@@ -16,7 +24,7 @@ export default function UserCart() {
                   source={{
                     uri: item.url
                   }}
-                  style={{  borderRadius: 20, height: 110, width:100,resizeMode : 'contain', }}
+                  style={{ borderRadius: 20, height: 110, width: 100, resizeMode: 'contain', }}
 
                 />
 
@@ -50,59 +58,14 @@ export default function UserCart() {
             </View>
           })
         }
-
+        {/* Cart Header */}
+        <View style={styles.header}>
+          <Text style={{ fontSize: 18, }}>$567</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('UserCredsScreen')}>
+            <Text style={styles.button}>Place Order</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   )
 }
-const styles = StyleSheet.create({
-  cartItem: {
-
-    height: 130,
-    flexDirection: 'row',
-    alignItems: "center",
-    padding: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc5b9'
-  },
-  headign: {
-    fontSize: 16
-  },
-  img: {
-    // height: 100,
-    // width: 100,
-    // backgroundColor: "red",
-    borderRadius: 20
-  },
-  productTitle: {
-    width: 230,
-    height: 140,
-    padding: 13,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-
-  },
-  quantity: {
-    flexDirection: 'row'
-  },
-
-  btn: {
-    borderRadius: 10,
-    width: 30,
-    borderColor: 'black',
-    borderWidth: 1,
-    height: 30
-
-  },
-  btnFont: {
-    fontSize: 14,
-    color: "black",
-    textAlign: 'center',
-    padding: 4
-  },
-  cross: {
-    position: "absolute",
-    left: 320,
-    top: 10
-  }
-})
