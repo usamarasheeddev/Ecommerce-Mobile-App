@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 export default function CartScreensNavigator() {
     return (
         <View style={{flex:1}}>
-            <Stack.Navigator initialRouteName='UserCredsScreen'
+            <Stack.Navigator initialRouteName='CheckOutScreen'
             >
                 <Stack.Group  screenOptions={{
                     headerShown:false

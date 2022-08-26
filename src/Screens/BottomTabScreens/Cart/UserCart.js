@@ -3,7 +3,7 @@ import React from 'react'
 import { useCartContext } from '../../../contexts/CartContext'
 import { styles } from './style'
 import Icon from 'react-native-vector-icons/Entypo'
-import UserCredsScreen from './UserCredsScreen'
+// import UserCredsScreen from './UserCredsScreen'
 
 export default function UserCart({ navigation }) {
   const { cartItems, setCartItems } = useCartContext()
