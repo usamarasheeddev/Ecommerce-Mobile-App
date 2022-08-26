@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTabScreen() {
     return (
-        <Tab.Navigator initialRouteName='UserCart'
+        <Tab.Navigator initialRouteName='Home'
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {

@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     input: {
         borderWidth: 1,
         borderColor: 'grey',
-        height: 35,
-        borderRadius:5
+        height: 37,
+        borderRadius:5,
+        padding:4
     }
 })

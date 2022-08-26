@@ -9,8 +9,6 @@ export default function Form({ navigation }) {
         email: '', userName: '', contactNo: '', city: '', address: ''
     }
 
-    const [userDetails, setUserDetails] = React.useState("");
-
     const validationSchema = Yup.object({
         userName: Yup.string().trim().min(3, 'Invalid Name').required('Name is required!'),
         email: Yup.string().email('Invalid Email').required('Email required!'),
@@ -24,12 +22,9 @@ export default function Form({ navigation }) {
         <Formik
             initialValues={orderCreds} validationSchema={validationSchema}
             onSubmit={(values, formikActions) => {
-                setTimeout(() => {
-                    setUserDetails({...values})
-                    formikActions.resetForm()
-                    navigation.navigate('CheckOutScreen',{userDetails})
-                    // formikActions.setSubmitting(false)
-                }, 1000);
+                formikActions.resetForm()
+                navigation.navigate('CheckOutScreen',{...values})
+                // formikActions.setSubmitting(false)
             }}
         >
             {({ handleChange, touched, handleBlur, isSubmitting, handleSubmit, values, errors }) => {

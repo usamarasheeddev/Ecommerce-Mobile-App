@@ -32,7 +32,7 @@ export default function UserCart({ navigation }) {
 
 
         {cartItems.length === 0 ?
-          <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 200 }}
+          <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 300 }}
           >No Item added to  cart</Text>
 
           : cartItems.map((item, i) => {

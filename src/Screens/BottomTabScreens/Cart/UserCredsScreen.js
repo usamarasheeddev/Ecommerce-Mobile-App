@@ -6,11 +6,7 @@ import Form from './Form';
 
 
 export default function UserCredsScreen({ navigation }) {
-  // const [orderCreds, setOrderCreds] = React.useState("");
-  // const handleOrderCreds = () => {
-  //   navigation.navigate('CheckOutScreen', { orderCreds })
 
-  // }
 
   return (
     <ScrollView>
