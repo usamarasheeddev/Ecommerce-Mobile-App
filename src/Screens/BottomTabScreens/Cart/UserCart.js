@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Entypo'
 
 export default function UserCart({ navigation }) {
   const { cartItems, decrimentQnt, incrimentQnt, removeItem } = useCartContext()
-
+  const itemsTotal = cartItems.reduce((a, c) => a + (c.price * c.qnt), 0)
 
   return (
     <ScrollView>
@@ -20,7 +20,7 @@ export default function UserCart({ navigation }) {
           </View>
 
           : <View style={styles.header}>
-            <Text style={{ fontSize: 18, }}>Total:  $567</Text>
+            <Text style={{ fontSize: 18, }}>Total:  ${itemsTotal}</Text>
             <TouchableOpacity onPress={() => navigation.navigate('UserCredsScreen')}>
               <Text style={styles.button}>Place Order</Text>
             </TouchableOpacity>
@@ -32,9 +32,11 @@ export default function UserCart({ navigation }) {
 
 
         {cartItems.length === 0 ?
-          <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 300 }}
-          >No Item added to  cart</Text>
-
+          <View>
+            <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 300 }}
+            >No Item added to  cart</Text>
+            
+          </View>
           : cartItems.map((item, i) => {
             return <View key={i} style={styles.cartItem}>
               <View style={styles.img}>

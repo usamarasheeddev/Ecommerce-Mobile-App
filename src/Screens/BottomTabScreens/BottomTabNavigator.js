@@ -55,7 +55,7 @@ export default function BottomTabScreen() {
                 <Tab.Screen name='Favurite Item' component={FavuriteItems}
                     options={{
                         tabBarIcon: (({ color }) => <Heart name='heart' color={color} size={25} />),
-                        tabBarActiveTintColor: 'red'
+                        tabBarActiveTintColor: 'red',headerTitleAlign:'center'
                     }}
                 />
 

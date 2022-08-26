@@ -55,11 +55,13 @@ export const styles = StyleSheet.create({
     },
 
     btn: {
-        borderRadius: 10,
+        // borderRadius: 10,
         width: 30,
-        borderColor: 'black',
-        borderWidth: 1,
-        height: 30
+        // borderColor: 'black',
+        // borderWidth: 1,
+        height: 30,
+        fontSize:28,
+        backgroundColor:'#fee440'
 
     },
     btnFont: {

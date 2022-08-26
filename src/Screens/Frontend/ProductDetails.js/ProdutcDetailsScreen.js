@@ -31,6 +31,7 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
                             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
                             .join(' ')}</Text>
                         {/* <Text style={styles.text}>$200</Text> */}
+                        <Text style={{ padding: 8, fontSize: 18,color:'#4361ee' }}>${item.price}</Text>
                         <Text style={{
                             color: 'black', fontSize: 18, marginTop: 10, marginBottom: 20
                         }}>Details</Text>
@@ -41,7 +42,7 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
 
 
                 <View style={styles.buttonBox}>
-                    <Text style={{ padding: 8, fontSize: 18 }}>$200</Text>
+                    {/* <Text style={{ padding: 8, fontSize: 18 }}>$200</Text> */}
                     <TouchableOpacity style={styles.button}
                         onPress={() => addToCart(item)}
                     >
