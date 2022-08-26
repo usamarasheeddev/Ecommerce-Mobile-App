@@ -5,13 +5,13 @@ import { useCartContext } from '../../../contexts/CartContext'
 
 export default function ProdutcDetailsScreen({ navigation, route }) {
     const { item } = route.params
-    const { setCartItems } = useCartContext()
+    const { addToCart } = useCartContext()
 
 
-    const addToCart = (item) => {
-        // alert(item.title)
-        setCartItems(s => ([...s, item]))
-    }
+    // const addToCart = (item) => {
+    //     // alert(item.title)
+    //     setCartItems(s => ([...s, item]))
+    // }
 
     return (
         <ScrollView>
@@ -22,7 +22,7 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
                         source={{
                             uri: item.url
                         }}
-                        style={{ flex: 1, width: "100%", borderRadius: 20, height: 370, resizeMode : 'contain', marginTop: 2, resizeMode: 'contain' }}
+                        style={{ flex: 1, width: "100%", borderRadius: 20, height: 370, resizeMode: 'contain', marginTop: 2, resizeMode: 'contain' }}
 
                     />
                     <View style={styles.textBox}>

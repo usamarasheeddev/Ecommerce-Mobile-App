@@ -70,8 +70,10 @@ export const styles = StyleSheet.create({
     },
     cross: {
         position: "absolute",
-        left: 320,
-        top: 10
+        right:5,
+        bottom:20
+        // left: 320,
+        // top: 10
     },text:{
         
     },

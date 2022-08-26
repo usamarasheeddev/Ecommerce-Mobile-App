@@ -9,11 +9,11 @@ const Stack = createStackNavigator();
 
 export default function CartScreensNavigator() {
     return (
-        <View style={{flex:1}}>
-            <Stack.Navigator initialRouteName='CheckOutScreen'
+        <View style={{ flex: 1 }}>
+            <Stack.Navigator initialRouteName='Cart'
             >
-                <Stack.Group  screenOptions={{
-                    headerShown:false
+                <Stack.Group screenOptions={{
+                    headerShown: false
                 }}>
 
                     <Stack.Screen name="Cart" component={UserCart} />

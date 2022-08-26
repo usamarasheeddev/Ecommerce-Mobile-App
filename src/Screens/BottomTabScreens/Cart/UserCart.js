@@ -6,19 +6,37 @@ import Icon from 'react-native-vector-icons/Entypo'
 // import UserCredsScreen from './UserCredsScreen'
 
 export default function UserCart({ navigation }) {
-  const { cartItems, setCartItems } = useCartContext()
+  const { cartItems, decrimentQnt, incrimentQnt, removeItem } = useCartContext()
 
 
   return (
     <ScrollView>
+      {/* Cart Header */}
+      <View>
 
+        {cartItems.length === 0 ?
+          <View>
+
+          </View>
+
+          : <View style={styles.header}>
+            <Text style={{ fontSize: 18, }}>Total:  $567</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('UserCredsScreen')}>
+              <Text style={styles.button}>Place Order</Text>
+            </TouchableOpacity>
+          </View>
+        }
+      </View>
       <View style={{ flex: 1 }}>
 
 
 
-        {
-          cartItems.map((item) => {
-            return <View style={styles.cartItem}>
+        {cartItems.length === 0 ?
+          <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 200 }}
+          >No Item added to  cart</Text>
+
+          : cartItems.map((item, i) => {
+            return <View key={i} style={styles.cartItem}>
               <View style={styles.img}>
                 <Image
                   source={{
@@ -40,31 +58,34 @@ export default function UserCart({ navigation }) {
                 {/* Qnt controler */}
                 <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                   <View style={styles.quantity}>
-                    <TouchableOpacity onPress={() => alert('hi')} style={styles.btn}>
+                    <TouchableOpacity
+                      onPress={() => decrimentQnt(item)}
+                      style={styles.btn}>
                       <Text style={styles.btnFont}>-</Text>
                     </TouchableOpacity>
-                    <View><Text style={{ fontSize: 16, color: 'black', width: 30, textAlign: "center", padding: 4 }} >2 </Text></View>
-                    <TouchableOpacity style={styles.btn}>
+
+                    <View><Text style={{ fontSize: 16, color: 'black', width: 30, textAlign: "center", padding: 4 }} >{item.qnt}</Text></View>
+
+                    <TouchableOpacity
+                      onPress={() => incrimentQnt(item)}
+                      style={styles.btn}>
                       <Text style={styles.btnFont}>+</Text>
                     </TouchableOpacity>
                   </View>
-                  <View><Text style={{ fontSize: 16, marginTop: 5 }}>$333</Text></View>
+                  <View><Text style={{ fontSize: 16, marginTop: 5 }}>${item.price * item.qnt}</Text></View>
                 </View>
 
-
+                {/* cross */}
               </View>
-              <Icon name='cross' style={styles.cross} size={26} color={"red"} />
-
+              <TouchableOpacity onPress={() => removeItem(item)}>
+                <View style={styles.cross}>
+                  <Icon name='cross' size={26} color={"red"} />
+                </View>
+              </TouchableOpacity>
             </View>
           })
         }
-        {/* Cart Header */}
-        <View style={styles.header}>
-          <Text style={{ fontSize: 18, }}>$567</Text>
-          <TouchableOpacity onPress={() => navigation.navigate('UserCredsScreen')}>
-            <Text style={styles.button}>Place Order</Text>
-          </TouchableOpacity>
-        </View>
+
       </View>
     </ScrollView>
   )

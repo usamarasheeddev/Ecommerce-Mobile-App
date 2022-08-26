@@ -8,20 +8,23 @@ import AuthContextProvider from './src/contexts/AuthContext';
 import CartContextProvider from './src/contexts/CartContext';
 import ScreensNavigator from './src/Screens/ScreensNavigator';
 import ProductsContextProvider from './src/contexts/ProductsContext';
+import OrderContextProvider from './src/contexts/OrderContext';
 
 const App = () => {
 
   return (
     <AuthContextProvider>
-      <ProductsContextProvider>
-        <CartContextProvider>
-          <NavigationContainer>
+      <OrderContextProvider>
+        <ProductsContextProvider>
+          <CartContextProvider>
+            <NavigationContainer>
 
-            <ScreensNavigator />
+              <ScreensNavigator />
 
-          </NavigationContainer>
-        </CartContextProvider>
-      </ProductsContextProvider>
+            </NavigationContainer>
+          </CartContextProvider>
+        </ProductsContextProvider>
+      </OrderContextProvider>
     </AuthContextProvider>
 
   );
