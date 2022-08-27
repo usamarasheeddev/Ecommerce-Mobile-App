@@ -1,6 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Button } from 'react-native'
 import React from 'react'
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavuriteItems from './FavuriteItems/FavuriteItems';
 import UserCart from './Cart/UserCart';
@@ -12,11 +11,31 @@ import Home from 'react-native-vector-icons/SimpleLineIcons'
 import Heart from 'react-native-vector-icons/SimpleLineIcons'
 import Search from 'react-native-vector-icons/Ionicons'
 import Bag from 'react-native-vector-icons/SimpleLineIcons'
-
+import User from 'react-native-vector-icons/AntDesign'
+import { IconButton, MD3Colors } from 'react-native-paper';
+import auth from "@react-native-firebase/auth"
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabScreen() {
+    const { isAuthenticated, dispatch } = useAuthContext()
+
+
+    const handleLogout = () => {
+        console.log(isAuthenticated)
+        auth().signOut()
+            .then(() => {
+                dispatch({ type: "LOGOUT" })
+            })
+            .catch((err) => {
+                console.error(err)
+                alert("Something went wrong")
+            })
+    }
+
+
+
     return (
         <Tab.Navigator initialRouteName='Home'
             screenOptions={{
@@ -52,16 +71,19 @@ export default function BottomTabScreen() {
                         tabBarIcon: (({ color }) => <Home name='home' color={color} size={25} />)
                     }}
                 />
-                <Tab.Screen name='Favurite Item' component={FavuriteItems}
-                    options={{
-                        tabBarIcon: (({ color }) => <Heart name='heart' color={color} size={25} />),
-                        tabBarActiveTintColor: 'red',headerTitleAlign:'center'
-                    }}
-                />
+
+
 
                 <Tab.Screen name='Search' component={SearchTab}
                     options={{
                         tabBarIcon: (({ color }) => <Search name='search-outline' size={30} color={color} />)
+                    }}
+                />
+
+                <Tab.Screen name='Favurite Item' component={FavuriteItems}
+                    options={{
+                        tabBarIcon: (({ color }) => <Heart name='heart' color={color} size={30} />),
+                        tabBarActiveTintColor: 'red', headerTitleAlign: 'center'
                     }}
                 />
 
@@ -70,8 +92,37 @@ export default function BottomTabScreen() {
                     options={{
 
                         tabBarIcon: (({ color }) => <Bag name='bag' size={25} color={color} />),
-                        headerShown:false,
+                        headerShown: false,
                     }} />
+
+                <Tab.Screen name='UserAccount' component={FavuriteItems}
+                    options={{
+                        tabBarIcon: (({ color }) => <User name='user' color={color} size={25} />),
+                        headerTitleAlign: 'center',
+                        headerRight: () => (
+                            <IconButton
+                                icon="logout"
+                                iconColor={MD3Colors.error50}
+                                size={26}
+                                onPress={ handleLogout}
+                            />
+                        ),
+                        headerLeft: () => (
+                            <IconButton
+                                icon="account"
+                                iconColor='blue'
+                                size={26}
+                                
+                            />
+                        )
+
+                    }}
+
+                />
+
+
+
+
             </Tab.Group>
         </Tab.Navigator>
 

@@ -77,8 +77,6 @@ export default function Login({ navigation }) {
             label="Password"
             // value={text}
             autoCapitalize='none'
-
-            name="email"
             onChangeText={value => handleChange("password", value)}
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'

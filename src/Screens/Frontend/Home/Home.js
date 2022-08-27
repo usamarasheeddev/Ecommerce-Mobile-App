@@ -24,36 +24,19 @@ export default function Home({ navigation }) {
 
 
     addFavuriteItem(id)
-    
+
 
   }
 
- 
 
-  // console.log(auth().currentUser.uid)
-  const handleLogout = () => {
-    console.log(isAuthenticated)
-    auth().signOut()
-      .then(() => {
-        dispatch({ type: "LOGOUT" })
-      })
-      .catch((err) => {
-        console.error(err)
-        alert("Something went wrong")
-      })
-  }
+
+
 
 
   return (
     <ScrollView >
       <View style={styles.flexContainer}>
-        <View style={{ width: "100%" }}>
-          {/* <Text style={styles.headigStyle}>Vegetables</Text> */}
-          <Button
-            title='logout'
-            onPress={() => handleLogout()}
-          />
-        </View>
+
         {
           //PRODUCT MAP FUNCTION
           products.map((item) => {
