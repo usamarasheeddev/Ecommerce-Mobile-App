@@ -12,14 +12,7 @@ export default function FavuriteItemsContextProvider({ children }) {
     const [favuriteItem, setFavuriteItem] = React.useState([])
 
     //SET FAVURITE ITEM
-    const handleFavurite = (id) => {
-        setProducts(
 
-            products.map((item) => item.id == id ? { ...item, isLiked: !item.isLiked } : item)
-        )
-        setFavuriteItem(s => ([...s, id]))
-        // addFavuriteItem(favuriteItem)
-    }
 
 
     const addFavuriteItem = async (id) => {
@@ -27,16 +20,16 @@ export default function FavuriteItemsContextProvider({ children }) {
         !favuriteItem.find((elem) => elem.id === id) ? setFavuriteItem(
             s => ([...s, { id }])) : null
 
-        await firestore()
-            .collection('favuriteItems').doc(auth().currentUser.uid)
-            .set({favuriteItem})
-            .then(() => {
-                console.log('User added!');
-                alert('user added')
-            }).catch(err => {
-                console.error(err)
-                alert(err)
-            })
+        // await firestore()
+        //     .collection('favuriteItems').doc(auth().currentUser.uid)
+        //     .set({favuriteItem})
+        //     .then(() => {
+        //         console.log('User added!');
+        //         alert('user added')
+        //     }).catch(err => {
+        //         console.error(err)
+        //         alert(err)
+        //     })
     }
 
 

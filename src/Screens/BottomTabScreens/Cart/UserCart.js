@@ -35,6 +35,12 @@ export default function UserCart({ navigation }) {
           <View>
             <Text style={{ fontWeight: 'bold', textAlign: 'center', marginTop: 300 }}
             >No Item added to  cart</Text>
+                <View style={{marginTop:10,alignItems:"center"}}>
+                {/* <Text style={{ fontSize: 18, }}>${itemsTotal}</Text> */}
+                <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
+                    <Text style={styles.button}>Home</Text>
+                </TouchableOpacity>
+            </View>
             
           </View>
           : cartItems.map((item, i) => {

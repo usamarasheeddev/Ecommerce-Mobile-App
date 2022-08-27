@@ -2,21 +2,48 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { styles } from './style'
 import { useCartContext } from '../../../contexts/CartContext'
+import auth from "@react-native-firebase/auth"
+import firestore from '@react-native-firebase/firestore';
+import { v4 as uuid } from 'uuid';
 
 
 
-export default function CheckOutScreen({ route }) {
+
+export default function CheckOutScreen({ route, navigation }) {
+    const [order, setOrder] = React.useState({})
     const { userName, email, contactNo, city, address } = route.params
     const { cartItems } = useCartContext()
     const shipping = 400
     const itemsTotal = cartItems.reduce((a, c) => a + (c.price * c.qnt), 0)
+    //DATE AND TIME
+    var today = new Date().toLocaleDateString();
+    var time = new Date().toLocaleTimeString();
+
+
+    const handleOrder = async () => {
+        let orderData = { cartItems, itemsTotal, shipping, userName, email, contactNo, city, address, status: 'pending', today, time }
+        // console.log(orderData)
+
+        await firestore()
+            .collection('orders').doc(uuid)
+            .set({ orderData })
+            .then(() => {
+                // console.log('User added!');
+                alert('order added')
+                navigation.navigate("Cart")
+            }).catch(err => {
+                console.error(err)
+                alert(err)
+            })
+    }
+
 
     // console.log(userDetails)
     return (
         <View style={{ flex: 1 }}>
             <View style={[styles.header, { justifyContent: 'flex-end' }]}>
                 {/* <Text style={{ fontSize: 18, }}>${itemsTotal}</Text> */}
-                <TouchableOpacity >
+                <TouchableOpacity onPress={handleOrder}>
                     <Text style={styles.button}>Order</Text>
                 </TouchableOpacity>
             </View>
