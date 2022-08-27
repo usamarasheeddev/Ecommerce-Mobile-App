@@ -11,7 +11,7 @@ const reducer = (state, { type, payload }) => {
     switch (type) {
         case "LOGIN":
 
-            return Object.assign({}, { isAuthenticated: true }, { user: payload.user })
+            return Object.assign({}, { isAuthenticated: true }, { user: payload.user },{ user:payload.user })
         case "FORGET":
             console.log('wor')
             return Object.assign({}, { isAuthenticated: false }, { user: payload.user })

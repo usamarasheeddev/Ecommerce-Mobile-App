@@ -1,10 +1,13 @@
-import { View, Text, ScrollView, TouchableWithoutFeedback, TouchableHighlight, StyleSheet, Image } from 'react-native'
+import { View, Text, ScrollView, TouchableWithoutFeedback, TouchableHighlight, StyleSheet,Button, Image } from 'react-native'
 import React from 'react'
 import { useProductsContext } from '../../../contexts/ProductsContext'
 import { styles } from './styles'
-import { IconButton, MD3Colors } from 'react-native-paper';
+import {  IconButton, MD3Colors } from 'react-native-paper';
+import { useAuthContext } from '../../../contexts/AuthContext';
+import auth from "@react-native-firebase/auth"
 
 export default function Home({ navigation }) {
+  const { isAuthenticated, dispatch } = useAuthContext()
   // const [isliked, setIsLiked] = React.useState(false)
   const { products, setProducts } = useProductsContext()
 
@@ -17,12 +20,29 @@ export default function Home({ navigation }) {
 
   }
 
+console.log(auth().currentUser.uid)
+  const handleLogout = () => {
+    console.log(isAuthenticated)
+    auth().signOut()
+      .then(() => {
+        dispatch({ type: "LOGOUT" })
+      })
+      .catch((err) => {
+        console.error(err)
+        alert("Something went wrong")
+      })
+  }
+
 
   return (
     <ScrollView >
       <View style={styles.flexContainer}>
         <View style={{ width: "100%" }}>
           {/* <Text style={styles.headigStyle}>Vegetables</Text> */}
+          <Button
+            title='logout'
+            onPress={()=>handleLogout()}
+          />
         </View>
         {
           //PRODUCT MAP FUNCTION

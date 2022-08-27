@@ -8,7 +8,7 @@ export default function ScreensNavigator() {
     const { isAuthenticated } = useAuthContext()
     return (
         <View style={{ flex: 1 }}>
-            {isAuthenticated ?
+            {!isAuthenticated ?
                 <AuthScreenNavigator />
 
                 : <BottomTabNavigator />

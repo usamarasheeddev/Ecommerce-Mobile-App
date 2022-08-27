@@ -4,6 +4,9 @@ import * as React from 'react';
 import { TextInput } from 'react-native-paper';
 import { useAuthContext } from '../../contexts/AuthContext';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import  firebase  from '@react-native-firebase/app';
+
 
 const initialState = { email: '', password: '' }
 export default function SignUp({ navigation }) {
@@ -17,7 +20,7 @@ export default function SignUp({ navigation }) {
   }
 
   const handleSignUp = () => {
-    let { email, password} = state
+    let { email, password } = state
     if (!email) return alert("Email is invalid")
     if (!password) return alert("Password is invalid")
     // if (!username) return alert("Username is invalid")
@@ -27,8 +30,9 @@ export default function SignUp({ navigation }) {
       .then((userCredential) => {
         const user = userCredential.user
 
-        dispatch({ type: "LOGIN", payload: { user } })
-        console.log('User account created  !');
+        // dispatch({ type: "LOGIN", payload: { user } })
+        console.log(user);
+        createUserProfile(user)
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -42,6 +46,30 @@ export default function SignUp({ navigation }) {
         console.error(error);
       })
   }
+
+
+  const createUserProfile = async (user) => {
+    let formData = {
+      firstName: "",
+      lastName: "",
+      email: user.email,
+      uid: user.uid,
+      dateCreated: firebase.firestore.FieldValue.serverTimestamp()
+    }
+    await firestore()
+      .collection('users')
+      .doc(user.uid)
+      .set(formData)
+      .then(() => {
+        console.log('User added!');
+        dispatch({ type: "LOGIN", payload: { user } })
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
+
 
 
   return (
@@ -58,6 +86,7 @@ export default function SignUp({ navigation }) {
             style={{ marginTop: 10 }}
             mode="outlined"
             label="Email"
+            autoCapitalize='none'
             // value={text}
             name="email"
             onChangeText={value => handleChange("email", value)}
