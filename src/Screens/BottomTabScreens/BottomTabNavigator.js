@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import FavuriteItems from './Cart/FavuriteItems/FavuriteItems';
+import FavuriteItems from './FavuriteItems/FavuriteItems';
 import UserCart from './Cart/UserCart';
 import HomeScreenNavigator from '../Frontend/HomeScreenNavigator';
 import SearchTab from './SearchTab.js/SearchTab';

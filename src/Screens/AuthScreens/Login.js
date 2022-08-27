@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 
 const initialState = { email: '', password: '' }
 export default function Login({ navigation }) {
+  const [showPassword, setShowPassword] = React.useState(false)
   const [user, setUser] = React.useState("");
   const [state, setState] = React.useState(initialState)
   const { dispatch } = useAuthContext()
@@ -62,6 +63,8 @@ export default function Login({ navigation }) {
             style={{ marginTop: 10 }}
             mode="outlined"
             label="Email"
+            keyboardType='email-address'
+            autoCapitalize='none'
             // value={text}
             name="email"
             onChangeText={value => handleChange("email", value)}
@@ -73,21 +76,24 @@ export default function Login({ navigation }) {
             mode="outlined"
             label="Password"
             // value={text}
+            autoCapitalize='none'
+
             name="email"
             onChangeText={value => handleChange("password", value)}
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'
-            secureTextEntry
-            right={<TextInput.Icon name="eye-off" />}
+            secureTextEntry={showPassword}
+            right={<TextInput.Icon name={showPassword ? 'eye' : 'eye-off'}
+              onPress={() => setShowPassword(!showPassword)} />}
             fontSize=''
           />
-          
 
-          <Text style={{textAlign:"right",marginTop:15}}
-          onPress={()=>navigation.navigate('forgetPassword')}
+
+          <Text style={{ textAlign: "right", marginTop: 15 }}
+            onPress={() => navigation.navigate('forgetPassword')}
           >Forget password?</Text>
 
-          
+
         </View>
         <View style={{ marginTop: 30 }}>
           <Button

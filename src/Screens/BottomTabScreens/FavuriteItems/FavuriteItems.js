@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, TouchableWithoutFeedback, Image } from 'react-native'
 import React from 'react'
-import { useProductsContext } from '../../../../contexts/ProductsContext'
-import { styles } from '../../../Frontend/Home/styles'
+import { useProductsContext } from '../../../contexts/ProductsContext'
+import { styles } from '../../Frontend/Home/styles'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth'

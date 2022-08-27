@@ -5,11 +5,13 @@ import { TextInput } from 'react-native-paper';
 import { useAuthContext } from '../../contexts/AuthContext';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import  firebase  from '@react-native-firebase/app';
+import firebase from '@react-native-firebase/app';
 
 
 const initialState = { email: '', password: '' }
 export default function SignUp({ navigation }) {
+
+  const [showPassword, setShowPassword] = React.useState(true)
   const [userCreds, setUserCreds] = React.useState("");
   const { dispatch } = useAuthContext
   const [state, setState] = React.useState(initialState)
@@ -87,6 +89,7 @@ export default function SignUp({ navigation }) {
             mode="outlined"
             label="Email"
             autoCapitalize='none'
+            keyboardType='email-address'
             // value={text}
             name="email"
             onChangeText={value => handleChange("email", value)}
@@ -112,9 +115,10 @@ export default function SignUp({ navigation }) {
             onChangeText={value => handleChange("password", value)}
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'
-            secureTextEntry
-            right={<TextInput.Icon name="eye" />}
-            fontSize=''
+            secureTextEntry={showPassword}
+            right={<TextInput.Icon name={showPassword ? 'eye' : 'eye-off'}
+              onPress={() => setShowPassword(!showPassword)} />}
+
           />
 
         </View>
