@@ -1,15 +1,19 @@
-import { View, Text, ScrollView, TouchableWithoutFeedback, TouchableHighlight, StyleSheet,Button, Image } from 'react-native'
+import { View, Text, ScrollView, TouchableWithoutFeedback, TouchableHighlight, StyleSheet, Button, Image } from 'react-native'
 import React from 'react'
 import { useProductsContext } from '../../../contexts/ProductsContext'
 import { styles } from './styles'
-import {  IconButton, MD3Colors } from 'react-native-paper';
+import { IconButton, MD3Colors } from 'react-native-paper';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import auth from "@react-native-firebase/auth"
+import firestore from '@react-native-firebase/firestore';
+import { useFavuriteItemsContext } from '../../../contexts/FavuriteItemsContext';
 
 export default function Home({ navigation }) {
   const { isAuthenticated, dispatch } = useAuthContext()
   // const [isliked, setIsLiked] = React.useState(false)
   const { products, setProducts } = useProductsContext()
+  // const [favuriteItem, setFavuriteItem] = React.useState([])
+  const { addFavuriteItem, favuriteItem, setFavuriteItem } = useFavuriteItemsContext()
 
   //SET FAVURITE ITEM
   const handleFavurite = (id) => {
@@ -18,9 +22,15 @@ export default function Home({ navigation }) {
       products.map((item) => item.id == id ? { ...item, isLiked: !item.isLiked } : item)
     )
 
+
+    addFavuriteItem(id)
+    
+
   }
 
-console.log(auth().currentUser.uid)
+ 
+
+  // console.log(auth().currentUser.uid)
   const handleLogout = () => {
     console.log(isAuthenticated)
     auth().signOut()
@@ -41,7 +51,7 @@ console.log(auth().currentUser.uid)
           {/* <Text style={styles.headigStyle}>Vegetables</Text> */}
           <Button
             title='logout'
-            onPress={()=>handleLogout()}
+            onPress={() => handleLogout()}
           />
         </View>
         {

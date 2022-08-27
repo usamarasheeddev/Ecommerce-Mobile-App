@@ -61,7 +61,7 @@ export default function SignUp({ navigation }) {
       .doc(user.uid)
       .set(formData)
       .then(() => {
-        console.log('User added!');
+        // console.log('User added!');
         dispatch({ type: "LOGIN", payload: { user } })
       })
       .catch(err => {

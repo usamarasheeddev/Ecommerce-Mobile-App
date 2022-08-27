@@ -11,6 +11,7 @@ export default function CartContextProvider({ children }) {
 
         const exist = cartItems.find((elem) => elem.id === item.id)
 
+        console.log(cartItems)
         if (exist) {
             setCartItems(
                 cartItems.map((x) => x.id === item.id ? { ...exist, qnt: exist.qnt + 1 } : x)

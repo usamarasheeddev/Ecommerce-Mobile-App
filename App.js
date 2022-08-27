@@ -9,21 +9,24 @@ import CartContextProvider from './src/contexts/CartContext';
 import ScreensNavigator from './src/Screens/ScreensNavigator';
 import ProductsContextProvider from './src/contexts/ProductsContext';
 import OrderContextProvider from './src/contexts/OrderContext';
+import FavuriteItemsContextProvider from './src/contexts/FavuriteItemsContext';
 
 const App = () => {
 
   return (
     <AuthContextProvider>
       <OrderContextProvider>
-        <ProductsContextProvider>
-          <CartContextProvider>
-            <NavigationContainer>
+        <FavuriteItemsContextProvider>
+          <ProductsContextProvider>
+            <CartContextProvider>
+              <NavigationContainer>
 
-              <ScreensNavigator />
+                <ScreensNavigator />
 
-            </NavigationContainer>
-          </CartContextProvider>
-        </ProductsContextProvider>
+              </NavigationContainer>
+            </CartContextProvider>
+          </ProductsContextProvider>
+        </FavuriteItemsContextProvider>
       </OrderContextProvider>
     </AuthContextProvider>
 
