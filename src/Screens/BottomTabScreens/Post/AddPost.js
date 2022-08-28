@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
-import UserCart from './UserCart';
-import UserCredsScreen from './UserCredsScreen';
-import CheckOutScreen from './CheckOutScreen';
+// import AddPostForm from './';
+import UploadImg from './UploadImg';
 
 const Stack = createStackNavigator();
 
@@ -16,9 +15,8 @@ export default function CartScreensNavigator() {
                     headerShown: false
                 }}>
 
-                    <Stack.Screen name="Cart" component={UserCart} />
-                    <Stack.Screen name="UserCredsScreen" component={UserCredsScreen} />
-                    <Stack.Screen name="CheckOutScreen" component={CheckOutScreen} />
+                    <Stack.Screen name="AddNewPost" component={UploadImg} />
+                   
                 </Stack.Group>
 
             </Stack.Navigator>

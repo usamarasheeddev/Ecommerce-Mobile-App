@@ -11,23 +11,27 @@ import ProductsContextProvider from './src/contexts/ProductsContext';
 import OrderContextProvider from './src/contexts/OrderContext';
 import FavuriteItemsContextProvider from './src/contexts/FavuriteItemsContext';
 
+import PostContextProvider from './src/contexts/PostContext';
+
 const App = () => {
 
   return (
     <AuthContextProvider>
-      <OrderContextProvider>
-        <FavuriteItemsContextProvider>
-          <ProductsContextProvider>
-            <CartContextProvider>
-              <NavigationContainer>
+      <PostContextProvider>
+        <OrderContextProvider>
+          <FavuriteItemsContextProvider>
+            <ProductsContextProvider>
+              <CartContextProvider>
+                <NavigationContainer>
 
-                <ScreensNavigator />
+                  <ScreensNavigator />
 
-              </NavigationContainer>
-            </CartContextProvider>
-          </ProductsContextProvider>
-        </FavuriteItemsContextProvider>
-      </OrderContextProvider>
+                </NavigationContainer>
+              </CartContextProvider>
+            </ProductsContextProvider>
+          </FavuriteItemsContextProvider>
+        </OrderContextProvider>
+      </PostContextProvider>
     </AuthContextProvider>
 
   );
