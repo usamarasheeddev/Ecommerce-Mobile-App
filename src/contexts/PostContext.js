@@ -4,6 +4,7 @@ import shopProducts from '../Screens/data'
 const PostsContext = createContext()
 export default function PostContextProvider({ children }) {
     const [post, setPost] = useState(shopProducts)
+    const [imgUrl, setImgUrl] = useState('')
 
     // console.log(post)
     return (

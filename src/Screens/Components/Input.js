@@ -21,10 +21,12 @@ export default function Input(props) {
 const styles = StyleSheet.create({
 
     input: {
-        borderWidth: 1,
+        borderWidth: 0,
         borderColor: 'grey',
         height: 37,
         borderRadius:5,
-        padding:4
+        padding:4,
+        border:'none',
+        borderBottomWidth:1,
     }
 })

@@ -2,15 +2,19 @@ import { View, Text, Button, Image, ScrollView } from 'react-native'
 import React, { useState, useCallback } from 'react'
 import { launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import { usePostContext } from '../../../contexts/PostContext';
 import Form from './Form'
 let options = {
     mediaType: 'photo',
     selectionLimit: 1
 }
+let postImage = ''
 export default function UploadImg() {
+    // const [imgUrl,setImgUrl]=React.useState('')
+    const { post, setPost, imgUrl, setImgUrl } = usePostContext()
     const [newPost, setNewPost] = React.useState('')
     const [imgUri, setImgUri] = useState(null);
-    let imgName, url,postImage
+    let imgName, url
 
     const imagePicker = () => {
         launchImageLibrary(options, (response) => {
@@ -37,25 +41,25 @@ export default function UploadImg() {
             const reference = await storage().ref(`/images/${imgName}`).putFile(imgUri);
             console.log(reference)
             url = await storage().ref(`/images/${imgName}`).getDownloadURL();
-            postImage = { ...newPost, url, img,propertyStatus:'avialable' }
-            
+            // postImage = { ...newPost, url, img,propertyStatus:'avialable' }
+            setImgUrl({ ...newPost, url, img, propertyStatus: 'avialable' })
             alert('Image uploaded')
-            console.log(url)
+            console.log(postImage)
 
         } catch { (error) => alert(error) }
     }
     return (
         <ScrollView>
-            <View style={{ flex: 1 ,marginTop:50,marginBottom:100}}>
+            <View style={{ flex: 1, marginTop: 50, marginBottom: 100 }}>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
 
-                    <View style={{ width: 150,backgroundColor:'#38b000' }}><Button
+                    <View style={{ width: 150, backgroundColor: '#38b000' }}><Button
                         title='Pick Image'
                         onPress={imagePicker}
 
                     /></View>
-                    <View style={{ width: 150 ,backgroundColor:'#38b000'}}>
+                    <View style={{ width: 150, backgroundColor: '#38b000' }}>
                         <Button
                             title='upload'
                             onPress={handleUpload}
@@ -69,7 +73,8 @@ export default function UploadImg() {
                 style={{ width: 300, height: 300, borderWidth: 1 }}
             /> */}
 
-                <Form postImage={postImage} />
+                <Form postImage={imgUrl} />
+
             </View>
         </ScrollView>
     )

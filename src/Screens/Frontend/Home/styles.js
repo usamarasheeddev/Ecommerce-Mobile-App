@@ -3,10 +3,9 @@ export const styles=StyleSheet.create({
     flexContainer: {
         flex: 1,
         padding: 10,
-        alignItems:'center'
-        // flexDirection: "row",
-        // justifyContent: "space-between",
-        // flexWrap: 'wrap'
+        alignItems:'center',
+        marginBottom:80
+   
       },
       headigStyle: {
         textAlign: 'center',
@@ -20,10 +19,7 @@ export const styles=StyleSheet.create({
         borderRadius: 20,
         marginTop: 15,
         padding:5,
-        // padding: 6,
-        // borderColor: "#4e484f",
-        // borderWidth: 1,
-        // boxShadow:'#4e484f',
+   
         backgroundColor:'#cfe1b9'
     
       },

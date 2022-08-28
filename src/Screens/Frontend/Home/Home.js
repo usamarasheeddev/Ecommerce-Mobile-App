@@ -8,6 +8,7 @@ import auth from "@react-native-firebase/auth"
 import firestore from '@react-native-firebase/firestore';
 import { useFavuriteItemsContext } from '../../../contexts/FavuriteItemsContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
 export default function Home({ navigation }) {
@@ -19,7 +20,7 @@ export default function Home({ navigation }) {
 
   //SET FAVURITE ITEM
   const handleFavurite = (id) => {
-    
+
     setPost(
 
       post.map((item) => item.id == id ? { ...item, isLiked: !item.isLiked } : item)
@@ -32,18 +33,41 @@ export default function Home({ navigation }) {
   }
 
 
-
-
-
-
   return (
     <ScrollView >
       <View style={styles.flexContainer}>
+<View style={{width:330}}> 
 
+        <View style={{ paddingVertical: 10, marginVertical: 10 }}>
+          <Text variant='headlineSmall' style={{ fontWeight: 'bold' }}> This Might Help You</Text>
+        </View>
+        <View >
+          <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <View style={{ justifyContent: 'center', alignItems: 'center', }}>
+              <Ionicons name='card' color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} size={45} />
+              <Text style={{ textAlign: 'center' }}>Find Agent</Text>
+            </View>
+            <View>
+              <Ionicons name='map' size={45} color='#40916c'
+                style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }}
+              />
+              <Text style={{ textAlign: 'center', }}>Maps</Text>
+            </View>
+            <View>
+              <Ionicons name='home' size={45} color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} />
+              <Text style={{ textAlign: 'center' }}>Houses</Text>
+            </View>
+            <View>
+              <Ionicons name='newspaper' size={45} color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} />
+              <Text style={{ textAlign: 'center' }}>News</Text>
+            </View>
+          </View>
+        </View>
+        </View>
         {
           //PRODUCT MAP FUNCTION
-          post.map((item) => {
-            return <TouchableWithoutFeedback key={item.id} onPress={() => navigation.navigate('ProductDetails', { item })}>
+          post.map((item, i) => {
+            return <TouchableWithoutFeedback key={i} onPress={() => navigation.navigate('ProductDetails', { item })}>
               <View style={[styles.box, styles.shadowProp]}>
 
                 <IconButton

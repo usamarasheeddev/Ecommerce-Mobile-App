@@ -67,8 +67,10 @@ export default function BottomTabScreen({ navigation }) {
                 <Tab.Screen name='Home' component={HomeScreenNavigator}
 
                     options={{
-                        headerShown: false,
-                        tabBarIcon: (({ color }) => <Home name='home' color={color} size={25} />)
+                        headerShown: true,
+                        tabBarIcon: (({ color }) => <Home name='home' color={color} size={25} 
+                        
+                        />)
                     }}
                 />
 

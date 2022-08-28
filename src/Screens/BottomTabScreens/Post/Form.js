@@ -4,20 +4,48 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Input from '../../Components/Input'
 import { usePostContext } from '../../../contexts/PostContext'
+import { v4 as uuid } from 'uuid';
+import firestore from '@react-native-firebase/firestore';
+import firebase from '@react-native-firebase/app';
 
 export default function Form({ navigation, postImage }) {
-    const { post, setPost } = usePostContext()
+    const { post, setPost, imgUrl, setImgUrl } = usePostContext()
     const postCreds = {
         email: '', title: '', contactNo: '', city: '', address: '',
-        area: '', rooms: '', bath: '', kitchen: ''
+        area: '', rooms: '', bath: '', kitchen: '', discription: ''
     }
+
+    // React.useEffect(() => {
+    //     alert(postImage)
+    // }, [postImage])
+
+
+    const uploadToFirebase = async (data) => {
+        console.log(data)
+        // await firestore()
+        //     .collection('posts')
+        //     .doc(uuid)
+        //     .set(data)
+        //     .then(() => {
+        //         console.log('post');
+        //         alert("post added")
+
+        //     })
+        //     .catch(err => {
+        //         console.error(err)
+        //     })
+    }
+
+
+
 
     const validationSchema = Yup.object({
         title: Yup.string().trim().min(3, 'Invalid Name').required('Name is required!'),
         email: Yup.string().email('Invalid Email').required('Email required!'),
         contactNo: Yup.number().required('Contact number required! '),
         city: Yup.string().trim().min(5, 'Too short name of city').required("City name required!"),
-        address: Yup.string().trim().min(25, "Too short address").required('Address required!'),
+        discription: Yup.string().trim().min(2, "Too short discription").required('Discription required!'),
+        address: Yup.string().trim().min(2, "Too short address").required('Address required!'),
         area: Yup.number().required('Area required!'),
         rooms: Yup.number().required('Rooms required!'),
         bath: Yup.number().required('Bath required!'),
@@ -25,12 +53,17 @@ export default function Form({ navigation, postImage }) {
     })
 
 
+
+
     return (
         <Formik
             initialValues={postCreds} validationSchema={validationSchema}
             onSubmit={(values, formikActions) => {
 
-                setPost(s => ([{ ...s, postImage, values }]))
+                // setImgUrl(s=>({...s,values}))
+                setPost(s => ([{ ...s, imgUrl, values }]))
+                uploadToFirebase(imgUrl)
+                console.log({ postImage, values })
                 formikActions.resetForm()
 
                 // formikActions.setSubmitting(false)
@@ -40,13 +73,18 @@ export default function Form({ navigation, postImage }) {
 
                 return <>
 
+                    <Button
+                        title='onSubmit'
+                        onPress={() => alert(postImage)}
+                    />
                     <Input
                         placeholdero=''
-                        label='title'
+                        label='Title'
                         onChangeText={handleChange('title')}
                         onBlur={handleBlur('title')}
                         value={values.title}
                         error={touched.title && errors.title}
+
 
                     />
 
@@ -82,6 +120,21 @@ export default function Form({ navigation, postImage }) {
                         error={touched.city && errors.city}
 
                     />
+
+
+                    <Input
+
+                        label='Discription*'
+                        onChangeText={handleChange('discription')}
+                        onBlur={handleBlur('discription')}
+                        value={values.discription}
+                        multiline={true}
+                        numberOfLines={4}
+                        error={touched.discription && errors.discription}
+                        autoCaptlize='word'
+                    />
+
+
                     <Input
                         placeholdero='Address*'
                         label='Address*'
