@@ -1,10 +1,13 @@
-import { View, Text } from 'react-native'
+import { View, Text ,Button} from 'react-native'
 import React from 'react'
 
-export default function UserAccount() {
+export default function UserAccount({navigation}) {
   return (
     <View>
-      <Text>UserAccount</Text>
+      <Button
+      title='Add Products'
+      onPress={()=>navigation.navigate('AddProducts')}
+      />
     </View>
   )
 }

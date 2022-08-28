@@ -6,6 +6,7 @@ import BottomTabNavigator from './BottomTabScreens/BottomTabNavigator'
 
 export default function ScreensNavigator() {
     const { isAuthenticated } = useAuthContext()
+   
     return (
         <View style={{ flex: 1 }}>
             {!isAuthenticated ?

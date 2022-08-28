@@ -15,10 +15,11 @@ import User from 'react-native-vector-icons/AntDesign'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import auth from "@react-native-firebase/auth"
 import { useAuthContext } from '../../contexts/AuthContext';
+import UserScreenNavigator from './UserAccount/UserScreenNavigator';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomTabScreen() {
+export default function BottomTabScreen({navigation}) {
     const { isAuthenticated, dispatch } = useAuthContext()
 
 
@@ -95,7 +96,7 @@ export default function BottomTabScreen() {
                         headerShown: false,
                     }} />
 
-                <Tab.Screen name='UserAccount' component={FavuriteItems}
+                <Tab.Screen name='Account' component={UserScreenNavigator}
                     options={{
                         tabBarIcon: (({ color }) => <User name='user' color={color} size={25} />),
                         headerTitleAlign: 'center',
@@ -112,7 +113,7 @@ export default function BottomTabScreen() {
                                 icon="account"
                                 iconColor='blue'
                                 size={26}
-                                
+                                onPress={()=>navigation.navigate("Home")}
                             />
                         )
 

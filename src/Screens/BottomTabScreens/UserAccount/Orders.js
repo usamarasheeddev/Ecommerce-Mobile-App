@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function AdminScreenNavigator() {
+export default function Orders() {
   return (
     <View>
-      <Text>AdminScreenNavigator</Text>
+      <Text>Orders</Text>
     </View>
   )
 }
