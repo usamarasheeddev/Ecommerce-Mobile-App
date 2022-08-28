@@ -37,7 +37,7 @@ export default function BottomTabScreen({ navigation }) {
 
 
     return (
-        <Tab.Navigator initialRouteName='AddPost'
+        <Tab.Navigator initialRouteName='Home'
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {

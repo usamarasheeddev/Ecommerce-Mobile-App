@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, TouchableWithoutFeedback, Image } from 'react-native'
 import React from 'react'
 import { useProductsContext } from '../../../contexts/ProductsContext'
+import { usePostContext } from '../../../contexts/PostContext'
 import { styles } from '../../Frontend/Home/styles'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
@@ -9,15 +10,16 @@ import auth from '@react-native-firebase/auth'
 
 
 export default function FavuriteItems({ navigation }) {
-  const { products, setProducts } = useProductsContext()
+  // const { products, setProducts } = useProductsContext()
+  const{post,setPost }=usePostContext()
 
   const handleFavurite = (id) => {
-    setProducts(
+    setPost(
 
-      products.map((item) => item.id == id ? { ...item, isLiked: !item.isLiked } : item)
+      post.map((item) => item.id == id ? { ...item, isLiked: !item.isLiked } : item)
     )
     console.log("working...")
-    addFavuriteItem(id)
+    // addFavuriteItem(id)
 
   }
 
@@ -42,7 +44,7 @@ export default function FavuriteItems({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.flexContainer}>
-        {products.filter(item => item.isLiked == true).map((item) => {
+        {post.filter(item => item.isLiked == true).map((item) => {
           return <TouchableWithoutFeedback key={item.id} onPress={() => navigation.navigate('ProductDetails', { item })}>
             <View style={[styles.box, styles.shadowProp]}>
 

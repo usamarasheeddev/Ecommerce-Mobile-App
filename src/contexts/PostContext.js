@@ -1,10 +1,11 @@
 import React, { useContext, useState, createContext } from 'react'
+import shopProducts from '../Screens/data'
 
 const PostsContext = createContext()
 export default function PostContextProvider({ children }) {
-    const [post, setPost] = useState([])
+    const [post, setPost] = useState(shopProducts)
 
-    console.log(post)
+    // console.log(post)
     return (
         <PostsContext.Provider value={{ post, setPost }}>
             {children}

@@ -2,10 +2,11 @@ import { StyleSheet } from "react-native";
 export const styles=StyleSheet.create({
     flexContainer: {
         flex: 1,
-        padding: 20,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        flexWrap: 'wrap'
+        padding: 10,
+        alignItems:'center'
+        // flexDirection: "row",
+        // justifyContent: "space-between",
+        // flexWrap: 'wrap'
       },
       headigStyle: {
         textAlign: 'center',
@@ -13,14 +14,17 @@ export const styles=StyleSheet.create({
       },
       box: {
         // backgroundColor: "#38b000",
-        width: 150,
-        height: 240,
+        
+        width: 340,
+        height: 140,
         borderRadius: 20,
         marginTop: 15,
+        padding:5,
         // padding: 6,
-        borderColor: "#4e484f",
+        // borderColor: "#4e484f",
         // borderWidth: 1,
         // boxShadow:'#4e484f',
+        backgroundColor:'#cfe1b9'
     
       },
       textBox: {

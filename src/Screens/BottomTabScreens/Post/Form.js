@@ -8,12 +8,12 @@ import { usePostContext } from '../../../contexts/PostContext'
 export default function Form({ navigation, postImage }) {
     const { post, setPost } = usePostContext()
     const postCreds = {
-        email: '', ownerName: '', contactNo: '', city: '', address: '',
+        email: '', title: '', contactNo: '', city: '', address: '',
         area: '', rooms: '', bath: '', kitchen: ''
     }
 
     const validationSchema = Yup.object({
-        ownerName: Yup.string().trim().min(3, 'Invalid Name').required('Name is required!'),
+        title: Yup.string().trim().min(3, 'Invalid Name').required('Name is required!'),
         email: Yup.string().email('Invalid Email').required('Email required!'),
         contactNo: Yup.number().required('Contact number required! '),
         city: Yup.string().trim().min(5, 'Too short name of city').required("City name required!"),
@@ -42,11 +42,11 @@ export default function Form({ navigation, postImage }) {
 
                     <Input
                         placeholdero=''
-                        label='OwnerName'
-                        onChangeText={handleChange('ownerName')}
-                        onBlur={handleBlur('ownerName')}
-                        value={values.ownerName}
-                        error={touched.ownerName && errors.ownerName}
+                        label='title'
+                        onChangeText={handleChange('title')}
+                        onBlur={handleBlur('title')}
+                        value={values.title}
+                        error={touched.title && errors.title}
 
                     />
 
