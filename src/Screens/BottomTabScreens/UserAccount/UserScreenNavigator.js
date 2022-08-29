@@ -14,11 +14,13 @@ export default function UserScreenNavigator() {
 
             <Stack.Navigator initialRouteName='UserAccount'>
 
-                <Stack.Screen name='UserAccount' component={UserAccount} />
-                <Stack.Screen name='AddProducts' component={AddProducts} />
-                <Stack.Screen name='DelProducts' component={DelProducts} />
-                <Stack.Screen name='Orders' component={Orders} />
+                <Stack.Screen name='UserAccount' component={UserAccount}
+                
+                options={{
 
+                    headerShown:false
+                }}/>
+                
 
             </Stack.Navigator>
 

@@ -6,13 +6,13 @@ import Input from '../../Components/Input'
 import { usePostContext } from '../../../contexts/PostContext'
 import { v4 as uuid } from 'uuid';
 import firestore from '@react-native-firebase/firestore';
-import firebase from '@react-native-firebase/app';
+// import firebase from '@react-native-firebase/app';
 
-export default function Form({ navigation, postImage }) {
-    const { post, setPost, imgUrl, setImgUrl } = usePostContext()
+export default function Form({ navigation, setNewPost, newPost }) {
+    const { post, setPost, imgUrl } = usePostContext()
     const postCreds = {
         email: '', title: '', contactNo: '', city: '', address: '',
-        area: '', rooms: '', bath: '', kitchen: '', discription: ''
+        area: '', rooms: '', bath: '', kitchen: '', discription: '',price:''
     }
 
     // React.useEffect(() => {
@@ -21,26 +21,28 @@ export default function Form({ navigation, postImage }) {
 
 
     const uploadToFirebase = async (data) => {
-        console.log(data)
-        // await firestore()
-        //     .collection('posts')
-        //     .doc(uuid)
-        //     .set(data)
-        //     .then(() => {
-        //         console.log('post');
-        //         alert("post added")
+        try {
 
-        //     })
-        //     .catch(err => {
-        //         console.error(err)
-        //     })
+            await firestore()
+                .collection('Posts')
+                // .doc(uuid)
+                .add(data)
+                .then(() => {
+                    // console.log('post');
+                    alert("post added")
+
+                })
+        }
+        catch (err) {
+            console.error(err)
+        }
     }
 
 
 
 
     const validationSchema = Yup.object({
-        title: Yup.string().trim().min(3, 'Invalid Name').required('Name is required!'),
+        title: Yup.string().trim().max(20, 'Invalid Name').required('Name is required!'),
         email: Yup.string().email('Invalid Email').required('Email required!'),
         contactNo: Yup.number().required('Contact number required! '),
         city: Yup.string().trim().min(5, 'Too short name of city').required("City name required!"),
@@ -49,6 +51,7 @@ export default function Form({ navigation, postImage }) {
         area: Yup.number().required('Area required!'),
         rooms: Yup.number().required('Rooms required!'),
         bath: Yup.number().required('Bath required!'),
+        price: Yup.number().required('Price required!'),
         kitchen: Yup.number().required('Kitchen required!'),
     })
 
@@ -61,9 +64,11 @@ export default function Form({ navigation, postImage }) {
             onSubmit={(values, formikActions) => {
 
                 // setImgUrl(s=>({...s,values}))
-                setPost(s => ([{ ...s, imgUrl, values }]))
-                uploadToFirebase(imgUrl)
-                console.log({ postImage, values })
+                setNewPost(s => ({ ...s, ...values }))
+                // setNewPost({ newPost, ...values })
+                setPost(s => ([...s, {newPost, ...values,isLiked:false}]))
+                // console.log(newPost)
+                uploadToFirebase({newPost, ...values,isLiked:false})
                 formikActions.resetForm()
 
                 // formikActions.setSubmitting(false)
@@ -73,10 +78,6 @@ export default function Form({ navigation, postImage }) {
 
                 return <>
 
-                    <Button
-                        title='onSubmit'
-                        onPress={() => alert(postImage)}
-                    />
                     <Input
                         placeholdero=''
                         label='Title'
@@ -145,6 +146,16 @@ export default function Form({ navigation, postImage }) {
                         autoCaptlize='word'
                     />
 
+                    <Input
+                        placeholdero=''
+                        label='Price*'
+                        onChangeText={handleChange('price')}
+                        onBlur={handleBlur('price')}
+                        value={values.price}
+                        keyboardType='numeric'
+                        error={touched.price && errors.price}
+
+                    />
                     <Input
                         placeholdero=''
                         label='Area*'

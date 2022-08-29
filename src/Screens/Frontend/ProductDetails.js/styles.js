@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     flexContainer: {
         flex: 1,
-        marginBottom:80
+        marginBottom:10
     },
     heading: {
         fontSize: 18,
@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
     },
    
     textBox: {
-        margin: 15
+        margin: 15,
+        marginBottom:80
     },
     text:{
         fontSize:14

@@ -1,81 +1,96 @@
-import { View, Text, Button, Image, ScrollView } from 'react-native'
+import { View, Text, Button, Image, ScrollView, Alert, ActivityIndicator } from 'react-native'
 import React, { useState, useCallback } from 'react'
-import { launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import { usePostContext } from '../../../contexts/PostContext';
 import Form from './Form'
 let options = {
     mediaType: 'photo',
-    selectionLimit: 1
+    selectionLimit: 1,
+    croping: true,
+    height: 400,
+    width: 500
 }
-let postImage = ''
 export default function UploadImg() {
     // const [imgUrl,setImgUrl]=React.useState('')
     const { post, setPost, imgUrl, setImgUrl } = usePostContext()
-    const [newPost, setNewPost] = React.useState('')
+    const [isloading, setIsLoading] = React.useState(false)
+    const [isDisable, setIsDisable] = React.useState(false)
+    const [newPost, setNewPost] = React.useState(null)
     const [imgUri, setImgUri] = useState(null);
-    let imgName, url
 
     const imagePicker = () => {
-        launchImageLibrary(options, (response) => {
+
+        launchCamera, launchImageLibrary(options, (response) => {
             // console.log('response =', response);
-            setImgUri(response.assets[0].uri);
-            // img = response.assets[0].uri
-            // console.log(response.assets[0].uri);
+
 
             if (response.didCancel) {
-                alert('cancelled');
+                Alert.alert("Image Upload", "Cancelled")
+                setIsDisable(false)
             } else if (response.error) {
+                setIsDisable(false)
                 alert('Error : ', error);
             } else {
-                const source = { uri: response.uri };
+                // const source = { uri: response.uri };
+                setImgUri(response.assets[0].uri);
+                setIsDisable(true)
 
             }
         })
+
     }
 
     const handleUpload = async () => {
+        setIsLoading(true)
         imgName = imgUri.substring(imgUri.lastIndexOf('-') + 1)
-        console.log(imgName)
         try {
+
             const reference = await storage().ref(`/images/${imgName}`).putFile(imgUri);
             console.log(reference)
             url = await storage().ref(`/images/${imgName}`).getDownloadURL();
-            // postImage = { ...newPost, url, img,propertyStatus:'avialable' }
-            setImgUrl({ ...newPost, url, img, propertyStatus: 'avialable' })
-            alert('Image uploaded')
-            console.log(postImage)
-
+            // console.log(url)
+            setNewPost({ url, imgName, propertyStatus: 'avialable' })
+            setIsLoading(false)
+            setIsDisable(false)
+            // console.log(newPost)
         } catch { (error) => alert(error) }
     }
     return (
         <ScrollView>
-            <View style={{ flex: 1, marginTop: 50, marginBottom: 100 }}>
+            
+                {isloading ?
+                
+                    <ActivityIndicator style={{ flex: 1, marginTop: 350 }}
+                    size="large" color="#0000ff" /> :
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                    
 
-                    <View style={{ width: 150, backgroundColor: '#38b000' }}><Button
-                        title='Pick Image'
-                        onPress={imagePicker}
+                    <View style={{ flex: 1, marginTop: 50, marginBottom: 100 }}>
 
-                    /></View>
-                    <View style={{ width: 150, backgroundColor: '#38b000' }}>
-                        <Button
-                            title='upload'
-                            onPress={handleUpload}
-                        />
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+
+                            <View style={{ width: 150, backgroundColor: '#38b000' }}><Button
+                                title='Pick Image'
+                                onPress={imagePicker}
+
+                            /></View>
+                            <View style={{ width: 150, backgroundColor: '#38b000' }}>
+                                <Button
+                                    title='upload'
+                                    onPress={handleUpload}
+                                    disabled={!isDisable}
+                                />
+                            </View>
+                        </View>
+
+
+                        <Form setNewPost={setNewPost} newPost={newPost} />
+
                     </View>
-                </View>
 
-                {/* <Image
-                source={{ uri:url }}
-                // source={{ uri: imgUri }}
-                style={{ width: 300, height: 300, borderWidth: 1 }}
-            /> */}
-
-                <Form postImage={imgUrl} />
-
-            </View>
+                }
+            
         </ScrollView>
     )
 }

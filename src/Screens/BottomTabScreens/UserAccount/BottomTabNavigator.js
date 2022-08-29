@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import FavuriteItems from './FavuriteItems/FavuriteItems';
-import HomeScreenNavigator from '../Frontend/HomeScreenNavigator';
-import SearchTab from './SearchTab.js/SearchTab';
-import AddPost from './Post/AddPost';
+import FavuriteItems from '../FavuriteItems/FavuriteItems';
+import HomeScreenNavigator from '../../Frontend/HomeScreenNavigator';
+import SearchTab from '../SearchTab.js/SearchTab';
+import AddPost from '../Post/AddPost';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Home from 'react-native-vector-icons/SimpleLineIcons'
 import Heart from 'react-native-vector-icons/SimpleLineIcons'
@@ -13,8 +13,8 @@ import Plus from 'react-native-vector-icons/AntDesign'
 import User from 'react-native-vector-icons/AntDesign'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import auth from "@react-native-firebase/auth"
-import { useAuthContext } from '../../contexts/AuthContext';
-import UserScreenNavigator from './UserAccount/UserScreenNavigator';
+import { useAuthContext } from '../../../contexts/AuthContext';
+import UserScreenNavigator from './UserScreenNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +37,7 @@ export default function BottomTabScreen({ navigation }) {
 
 
     return (
-        <Tab.Navigator initialRouteName='Home'
+        <Tab.Navigator initialRouteName='Search'
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {
@@ -67,7 +67,7 @@ export default function BottomTabScreen({ navigation }) {
                 <Tab.Screen name='Home' component={HomeScreenNavigator}
 
                     options={{
-                        headerShown: false,
+                        headerShown: true,
                         tabBarIcon: (({ color }) => <Home name='home' color={color} size={25} 
                         
                         />)
@@ -96,7 +96,7 @@ export default function BottomTabScreen({ navigation }) {
 
 
                 <Tab.Screen name='Favurite Item' component={FavuriteItems}
-                    options={{tabBarBadge:1,
+                    options={{tabBarBadge:3,
                         tabBarIcon: (({ color }) => <Heart name='heart' color={color} size={26} />),
                         tabBarActiveTintColor: 'red', headerTitleAlign: 'center'
                     }}

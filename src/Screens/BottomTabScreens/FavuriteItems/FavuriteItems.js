@@ -6,12 +6,13 @@ import { styles } from '../../Frontend/Home/styles'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 
 export default function FavuriteItems({ navigation }) {
   // const { products, setProducts } = useProductsContext()
-  const{post,setPost }=usePostContext()
+  const { post, setPost } = usePostContext()
 
   const handleFavurite = (id) => {
     setPost(
@@ -36,16 +37,16 @@ export default function FavuriteItems({ navigation }) {
       .then(() => {
         console.log('User added!');
       }).catch(err => {
-                console.error(err)
-            })
+        console.error(err)
+      })
   }
 
 
   return (
     <ScrollView>
       <View style={styles.flexContainer}>
-        {post.filter(item => item.isLiked == true).map((item) => {
-          return <TouchableWithoutFeedback key={item.id} onPress={() => navigation.navigate('ProductDetails', { item })}>
+        {post.filter(item => item.isLiked == true).map((item,i) => {
+          return <TouchableWithoutFeedback key={i} onPress={() => navigation.navigate('ProductDetails', { item })}>
             <View style={[styles.box, styles.shadowProp]}>
 
               <IconButton
@@ -56,18 +57,35 @@ export default function FavuriteItems({ navigation }) {
                 style={{ position: 'absolute', zIndex: 1, top: -5, left: 105 }}
               />
               {/* //PRODUCT iMAGE */}
-              <Image
-                source={{
-                  uri: item.url
-                }}
-                style={{ width: 148, borderRadius: 20, height: 180, objectFit: "cover" }}
+              <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                <Image
+                  source={{
+                    uri: item.newPost.url
+                  }}
+                  style={{ width: 148, borderRadius: 20, height: 130, objectFit: "cover" }}
 
-              />
-              <View style={styles.textBox}>
-                <Text>{item.title}</Text>
-                <Text>${item.price}</Text>
+                />
+                <View style={styles.textBox}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 14 }}>{item.title}</Text>
+                  <Text style={{ fontWeight: 'bold', fontSize: 16 }}>PKR  {item.price}</Text>
+                  <Text style={{ fontWeight: 'bold', fontSize: 12, marginTop: 5 }}>{item.address}</Text>
+
+
+
+                  <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between', width: 130, marginTop: 10
+                  }}>
+                    <Icon name='bed' size={18} /><Text>{item.rooms}</Text>
+                    <Icon name='bathtub-outline' size={18} /><Text>{item.bath}</Text>
+                    <Icon name='crop-square' size={18} /><Text>{item.area}</Text>
+                  </View>
+                </View>
+                <View>
+
+
+                </View>
               </View>
-
 
             </View>
 

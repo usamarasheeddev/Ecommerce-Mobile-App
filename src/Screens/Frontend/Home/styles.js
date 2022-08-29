@@ -25,6 +25,7 @@ export const styles=StyleSheet.create({
       },
       textBox: {
         padding: 8,
+        width:200
     
       },
       shadowProp: {
