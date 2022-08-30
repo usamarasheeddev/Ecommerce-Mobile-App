@@ -32,9 +32,9 @@ export default function Home({ navigation }) {
   return (
     <ScrollView >
       <View style={styles.flexContainer}>
-        {!isLoadingPost?
-        <ActivityIndicator style={{marginTop:350}} size='large'/>
-          :<>
+        {!isLoadingPost ?
+          <ActivityIndicator style={{ marginTop: 350 }} size='large' />
+          : <>
             <View style={{ width: 330 }}>
 
               <View style={{ paddingVertical: 10, marginVertical: 10 }}>
@@ -68,9 +68,14 @@ export default function Home({ navigation }) {
             {
               //PRODUCT MAP FUNCTION
               post.map((item, i) => {
-                return <TouchableWithoutFeedback key={i} onPress={() => navigation.navigate('ProductDetails', { item })}>
-                  <View style={[styles.box, styles.shadowProp]}>
+                return <TouchableWithoutFeedback key={i} onPress={() => {
+                  isAuthenticated ?
+                    navigation.navigate('ProductDetails', { item }) : navigation.navigate('Auth', { screen: "Auth", initial: false })
+                }}>
 
+
+
+                  <View style={[styles.box, styles.shadowProp]}>
                     <IconButton
                       icon={!item.isLiked ? "heart-outline" : "heart"}
                       iconColor={MD3Colors.error50}
