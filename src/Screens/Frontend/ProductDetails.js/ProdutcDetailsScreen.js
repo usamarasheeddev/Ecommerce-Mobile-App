@@ -1,12 +1,11 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { styles } from './styles'
-import { useCartContext } from '../../../contexts/CartContext'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useAuthContext } from '../../../contexts/AuthContext'
 
 export default function ProdutcDetailsScreen({ navigation, route }) {
     const { item } = route.params
-    const { addToCart } = useCartContext()
 
 
     // const addToCart = (item) => {

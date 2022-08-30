@@ -12,7 +12,6 @@ const initialState = { email: '', password: '' }
 export default function SignUp({ navigation }) {
 
   const [showPassword, setShowPassword] = React.useState(true)
-  const [userCreds, setUserCreds] = React.useState("");
   const { dispatch } = useAuthContext
   const [state, setState] = React.useState(initialState)
 
@@ -25,7 +24,7 @@ export default function SignUp({ navigation }) {
     let { email, password } = state
     if (!email) return alert("Email is invalid")
     if (!password) return alert("Password is invalid")
-    // if (!username) return alert("Username is invalid")
+    if (!username) return alert("Username is invalid")
 
     auth()
       .createUserWithEmailAndPassword(email, password)
@@ -52,8 +51,7 @@ export default function SignUp({ navigation }) {
 
   const createUserProfile = async (user) => {
     let formData = {
-      firstName: "",
-      lastName: "",
+      userName: username,
       email: user.email,
       uid: user.uid,
       dateCreated: firebase.firestore.FieldValue.serverTimestamp()
@@ -96,7 +94,7 @@ export default function SignUp({ navigation }) {
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'
           />
-          {/* <TextInput
+          <TextInput
             style={{ marginTop: 10 }}
             mode="outlined"
             label="Username"
@@ -105,7 +103,7 @@ export default function SignUp({ navigation }) {
             onChangeText={value => handleChange("username", value)}
             outlineColor='#0466c8'
             activeOutlineColor='#4361ee'
-          /> */}
+          />
           <TextInput
             style={{ marginTop: 10 }}
             mode="outlined"
@@ -131,7 +129,10 @@ export default function SignUp({ navigation }) {
 
         <View >
           <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}
-            onPress={() => navigation.navigate('login')}
+            onPress={() => navigation.navigate('Login', {
+              screen: 'Login',
+              initial: false,
+            })}
           >
 
             Already have an account?</Text>

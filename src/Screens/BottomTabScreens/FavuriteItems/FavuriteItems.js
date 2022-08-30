@@ -1,6 +1,5 @@
 import { View, Text, ScrollView, TouchableWithoutFeedback, Image } from 'react-native'
 import React from 'react'
-import { useProductsContext } from '../../../contexts/ProductsContext'
 import { usePostContext } from '../../../contexts/PostContext'
 import { styles } from '../../Frontend/Home/styles'
 import { IconButton, MD3Colors } from 'react-native-paper';

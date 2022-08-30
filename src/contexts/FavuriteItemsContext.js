@@ -1,14 +1,9 @@
 import React, { createContext, useContext } from 'react'
-// import { useProductsContext } from './ProductsContext'
-import auth from "@react-native-firebase/auth"
-import firestore from '@react-native-firebase/firestore';
 const FavuriteItemContext = createContext()
-import shopProducts from '../Screens/data';
 
 
 // let favItems = []
 export default function FavuriteItemsContextProvider({ children }) {
-    const [products, setProducts] = React.useState(shopProducts)
     const [favuriteItem, setFavuriteItem] = React.useState([])
 
     //SET FAVURITE ITEM

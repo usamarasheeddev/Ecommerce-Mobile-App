@@ -13,8 +13,8 @@ export default function AuthScreenNavigator() {
       <Stack.Navigator initialRouteName='Login'>
 
         <Stack.Group screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='login' component={Login} />
-          <Stack.Screen name='signUp' component={SignUp} />
+          <Stack.Screen name='Login' component={Login} />
+          <Stack.Screen name='SignUp' component={SignUp} />
           <Stack.Screen name='forgetPassword' component={ForgetPassword} />
         </Stack.Group>
       </Stack.Navigator>

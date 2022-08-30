@@ -1,6 +1,5 @@
 import React, { useContext, useState, createContext } from 'react'
 import firestore from '@react-native-firebase/firestore';
-import shopProducts from '../Screens/data'
 
 const PostsContext = createContext()
 export default function PostContextProvider({ children }) {
@@ -18,11 +17,11 @@ export default function PostContextProvider({ children }) {
             .collection('Posts')
             .get()
             .then(querySnapshot => {
-                console.log('Total posts: ', querySnapshot.size);
+                // console.log('Total posts: ', querySnapshot.size);
 
                 querySnapshot.forEach(doc => {
                     arr.push({ ...doc.data(), id: doc.id })
-                    console.log(querySnapshot.size)
+                    // console.log(querySnapshot.size)
                     // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
                 });
                 setPost(arr)

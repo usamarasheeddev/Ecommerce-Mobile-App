@@ -5,10 +5,7 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthContextProvider from './src/contexts/AuthContext';
-import CartContextProvider from './src/contexts/CartContext';
 import ScreensNavigator from './src/Screens/ScreensNavigator';
-import ProductsContextProvider from './src/contexts/ProductsContext';
-import OrderContextProvider from './src/contexts/OrderContext';
 import FavuriteItemsContextProvider from './src/contexts/FavuriteItemsContext';
 
 import PostContextProvider from './src/contexts/PostContext';
@@ -18,19 +15,13 @@ const App = () => {
   return (
     <AuthContextProvider>
       <PostContextProvider>
-        <OrderContextProvider>
           <FavuriteItemsContextProvider>
-            <ProductsContextProvider>
-              <CartContextProvider>
                 <NavigationContainer>
 
                   <ScreensNavigator />
 
                 </NavigationContainer>
-              </CartContextProvider>
-            </ProductsContextProvider>
           </FavuriteItemsContextProvider>
-        </OrderContextProvider>
       </PostContextProvider>
     </AuthContextProvider>
 

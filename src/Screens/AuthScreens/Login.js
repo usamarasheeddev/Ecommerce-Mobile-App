@@ -2,15 +2,13 @@
 import { View, Text, StyleSheet, ImageBackground, Button } from 'react-native'
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
-import { useAuthContext } from '../../contexts/AuthContext';
 import auth from '@react-native-firebase/auth';
-
+import { useAuthContext } from '../../contexts/AuthContext';
 
 
 const initialState = { email: '', password: '' }
 export default function Login({ navigation }) {
   const [showPassword, setShowPassword] = React.useState(false)
-  const [user, setUser] = React.useState("");
   const [state, setState] = React.useState(initialState)
   const { dispatch } = useAuthContext()
 
@@ -102,7 +100,10 @@ export default function Login({ navigation }) {
 
         <View >
           <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}
-            onPress={() => navigation.navigate('signUp')}
+            onPress={() => navigation.navigate('SignUp', {
+              screen: 'SignUp',
+              initial: false,
+            })}
           >
 
             Don't have an account?</Text>

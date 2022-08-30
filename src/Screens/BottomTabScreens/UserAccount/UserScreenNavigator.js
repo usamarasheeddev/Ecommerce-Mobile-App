@@ -2,9 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import UserAccount from './UserAccount';
-import AddProducts from './AddProducts';
-import DelProducts from './DelProducts';
-import Orders from './Orders';
+
 
 const Stack = createStackNavigator();
 

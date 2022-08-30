@@ -2,7 +2,10 @@ import { View, Text, Button, Image, ScrollView, Alert, ActivityIndicator } from 
 import React, { useState, useCallback } from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import { useAuthContext } from '../../../contexts/AuthContext';
 import { usePostContext } from '../../../contexts/PostContext';
+import AuthScreenNavigator from '../../AuthScreens/AuthScreenNavigator';
+
 import Form from './Form'
 let options = {
     mediaType: 'photo',
@@ -11,7 +14,7 @@ let options = {
     height: 400,
     width: 500
 }
-export default function UploadImg() {
+export default function UploadImg({ navigation }) {
     // const [imgUrl,setImgUrl]=React.useState('')
     const { post, setPost, imgUrl, setImgUrl } = usePostContext()
     const [isloading, setIsLoading] = React.useState(false)
@@ -58,13 +61,13 @@ export default function UploadImg() {
     }
     return (
         <ScrollView>
-            
-                {isloading ?
-                
-                    <ActivityIndicator style={{ flex: 1, marginTop: 350 }}
-                    size="large" color="#0000ff" /> :
+            {
+                isloading ?
 
-                    
+                    <ActivityIndicator style={{ flex: 1, marginTop: 350 }}
+                        size="large" color="#0000ff" /> :
+
+
 
                     <View style={{ flex: 1, marginTop: 50, marginBottom: 100 }}>
 
@@ -89,8 +92,7 @@ export default function UploadImg() {
 
                     </View>
 
-                }
-            
+            }
         </ScrollView>
     )
 }

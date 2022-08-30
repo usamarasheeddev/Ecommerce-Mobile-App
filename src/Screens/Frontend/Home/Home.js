@@ -17,9 +17,6 @@ export default function Home({ navigation }) {
   const { post, setPost, isLoadingPost } = usePostContext()
   const [favuriteItem, setFavuriteItem] = React.useState([])
   // const { addFavuriteItem, favuriteItem, setFavuriteItem } = useFavuriteItemsContext()
-{
-  console.log(post)
-}
 
   //SET FAVURITE ITEM
   const handleFavurite = (id) => {
