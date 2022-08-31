@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { styles } from './styles'
+import { styles } from '../../Frontend/ProductDetails.js/styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useAuthContext } from '../../../contexts/AuthContext'
 
@@ -32,9 +32,9 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
                             .join(' ')}</Text>
                         {/* <Text style={styles.text}>$200</Text> */}
                         <Text style={{
-                            paddingVertical: 14, fontSize: 16,fontWeight:'bold',
+                            padding: 8, fontSize: 18,
                             color: '#40916c'
-                        }}>PKR  {item.price}</Text>
+                        }}>${item.price}</Text>
 
 
 
@@ -46,20 +46,20 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
 
                             <View style={{ alignItems: 'center' }}>
                                 <Icon name='bed' color='#40916c' size={28} />
-                                <Text style={styles.detaileScreenIcons}>Bed Rooms</Text>
+                                <Text style={{ textAlign: 'center', fontSize: 10 }} >Bed Rooms</Text>
                                 <Text>{item.rooms}</Text>
 
                             </View>
 
                             <View style={{ alignItems: 'center' }}>
                                 <Icon name='bathtub-outline' color='#40916c' size={28} />
-                                <Text style={styles.detaileScreenIcons} >Baths</Text>
+                                <Text style={{ textAlign: 'center', fontSize: 10 }} >Baths</Text>
                                 <Text >{item.bath}</Text>
                             </View>
 
                             <View style={{ alignItems: 'center' }}>
                                 <Icon name='crop-square' color='#40916c' size={28} />
-                                <Text style={styles.detaileScreenIcons} >Marlas</Text>
+                                <Text style={{ textAlign: 'center', fontSize: 10 }} >Marlas</Text>
                                 <Text>{item.area}</Text>
                             </View>
                         </View>

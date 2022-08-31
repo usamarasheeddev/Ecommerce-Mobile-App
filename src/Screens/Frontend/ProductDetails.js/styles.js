@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     },
     heading: {
         fontSize: 18,
-        fontWeight:"600",
+        fontWeight:"bold",
         color:"black",
         fontFamily:"roboto"
         
@@ -31,5 +31,8 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-around'
 
+    },
+    detaileScreenIcons:{
+        textAlign: 'center', fontSize: 10,fontWeight:'bold'
     }
 })

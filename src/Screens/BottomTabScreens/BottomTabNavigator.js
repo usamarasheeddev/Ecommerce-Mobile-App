@@ -15,6 +15,7 @@ import { IconButton, MD3Colors } from 'react-native-paper';
 import auth from "@react-native-firebase/auth"
 import { useAuthContext } from '../../contexts/AuthContext';
 import UserScreenNavigator from './UserAccount/UserScreenNavigator';
+import FavuriteItemsNavigator from './FavuriteItems/FavuriteItemsNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +38,7 @@ export default function BottomTabScreen({ navigation }) {
 
 
     return (
-        <Tab.Navigator initialRouteName='Home'
+        <Tab.Navigator initialRouteName='Search'
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {
@@ -68,8 +69,8 @@ export default function BottomTabScreen({ navigation }) {
 
                     options={{
                         headerShown: false,
-                        tabBarIcon: (({ color }) => <Home name='home' color={color} size={25} 
-                        
+                        tabBarIcon: (({ color }) => <Home name='home' color={color} size={25}
+
                         />)
                     }}
                 />
@@ -78,9 +79,9 @@ export default function BottomTabScreen({ navigation }) {
 
                 <Tab.Screen name='Search' component={SearchTab}
                     options={{
-                        headerShown:false,
+                        headerShown: false,
                         tabBarIcon: (({ color }) => <Search name='search-outline' size={30} color={color}
-                     />)
+                        />)
                     }}
                 />
 
@@ -95,10 +96,12 @@ export default function BottomTabScreen({ navigation }) {
                     }} />
 
 
-                <Tab.Screen name='Favurite Item' component={FavuriteItems}
-                    options={{tabBarBadge:1,
+                <Tab.Screen name='Favurite Items' component={FavuriteItemsNavigator}
+                    options={{
+                        // tabBarBadge: 1,
                         tabBarIcon: (({ color }) => <Heart name='heart' color={color} size={26} />),
-                        tabBarActiveTintColor: 'red', headerTitleAlign: 'center'
+                        tabBarActiveTintColor: 'red', headerTitleAlign: 'center',
+                        headerShown: false
                     }}
                 />
 
@@ -114,14 +117,7 @@ export default function BottomTabScreen({ navigation }) {
                                 onPress={handleLogout}
                             />
                         ),
-                        headerLeft: () => (
-                            <IconButton
-                                icon="account"
-                                iconColor='blue'
-                                size={26}
-                                onPress={() => navigation.navigate("Home")}
-                            />
-                        )
+                    
 
                     }}
 

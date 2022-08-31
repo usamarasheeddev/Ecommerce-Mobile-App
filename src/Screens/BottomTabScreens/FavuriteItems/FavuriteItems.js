@@ -15,11 +15,10 @@ export default function FavuriteItems({ navigation }) {
 
   const handleFavurite = (id) => {
     setPost(
-
       post.map((item) => item.id == id ? { ...item, isLiked: !item.isLiked } : item)
     )
-    console.log("working...")
     // addFavuriteItem(id)
+    getFromDb()
 
   }
 
@@ -28,23 +27,38 @@ export default function FavuriteItems({ navigation }) {
     console.log("ggggg")
     await firestore()
 
-      .collection('favuriteItems').doc(auth().currentUser.uid)
+      .collection('favuriteItems').doc(auth().currentUser.uid).collection('likedPosts')
       .add({
         FavuriteItemId: id
 
       })
       .then(() => {
         console.log('User added!');
+        alert('liked')
       }).catch(err => {
         console.error(err)
       })
   }
+let arr=[]
+  const getFromDb = () => {
+    firestore().collection('favuriteItems').doc(auth().currentUser.uid).collection('likedPosts')
+    .onSnapshot((snapshot) => {
+        setComments(snapshot.docs.map((doc) =>
+        doc.data()))
+ })
+}
+
+return (
+  <ScrollView>
+    {post.filter(item => item.isLiked == true).length == 0 ?
+      < Text style={{
+        textAlign: 'center', fontWeight: 'bold',
+        marginTop: 350
+      }}> No item found  </Text >
 
 
-  return (
-    <ScrollView>
-      <View style={styles.flexContainer}>
-        {post.filter(item => item.isLiked == true).map((item,i) => {
+      : <View style={styles.flexContainer}>
+        {post.filter(item => item.isLiked == true).map((item, i) => {
           return <TouchableWithoutFeedback key={i} onPress={() => navigation.navigate('ProductDetails', { item })}>
             <View style={[styles.box, styles.shadowProp]}>
 
@@ -90,9 +104,13 @@ export default function FavuriteItems({ navigation }) {
 
           </TouchableWithoutFeedback>
         })
-        }
-      </View>
-    </ScrollView>
 
-  )
+        }
+
+      </View>
+    }
+
+  </ScrollView >
+
+)
 }
