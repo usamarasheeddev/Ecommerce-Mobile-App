@@ -30,7 +30,6 @@ export default function SignUp({ navigation }) {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user
-
         // dispatch({ type: "LOGIN", payload: { user } })
         console.log(user);
         createUserProfile(user)

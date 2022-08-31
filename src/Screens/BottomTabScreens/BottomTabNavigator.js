@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { View, Text, StyleSheet, Button,StatusBar } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FavuriteItems from './FavuriteItems/FavuriteItems';
@@ -38,7 +38,8 @@ export default function BottomTabScreen({ navigation }) {
 
 
     return (
-        <Tab.Navigator initialRouteName='Search'
+        <Tab.Navigator initialRouteName='Home'
+        
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {
@@ -56,22 +57,29 @@ export default function BottomTabScreen({ navigation }) {
                         width: 10,
                         height: 10,
                     }
-
-                }
+                    ,
+                },tabBarInactiveTintColor:"#cfe1b9",
+                
+                
             }}
         >
 
             {/* BottomTabS */}
             <Tab.Group
-                screenOptions={{ tabBarShowLabel: false }}>
+                screenOptions={{ tabBarShowLabel: false ,}}>
+                    
 
-                <Tab.Screen name='Home' component={HomeScreenNavigator}
-
+                <Tab.Screen name='Feed' component={HomeScreenNavigator}
                     options={{
-                        headerShown: false,
+                        // headerShown: false,
                         tabBarIcon: (({ color }) => <Home name='home' color={color} size={25}
-
-                        />)
+                        />),
+                        headerStyle:{
+                            // backgroundColor:'#40916c',
+                        
+                        }
+                        // ,headerTintColor:'white'
+                        ,headerTitleAlign:'center'
                     }}
                 />
 
@@ -81,7 +89,7 @@ export default function BottomTabScreen({ navigation }) {
                     options={{
                         headerShown: false,
                         tabBarIcon: (({ color }) => <Search name='search-outline' size={30} color={color}
-                        />)
+                        />),tabBarHideOnKeyboard:true,
                     }}
                 />
 
@@ -92,7 +100,7 @@ export default function BottomTabScreen({ navigation }) {
                     options={{
 
                         tabBarIcon: (({ color }) => <Plus name='pluscircle' size={38} color={color} />),
-                        headerShown: false,
+                        headerShown: false,tabBarHideOnKeyboard:true
                     }} />
 
 

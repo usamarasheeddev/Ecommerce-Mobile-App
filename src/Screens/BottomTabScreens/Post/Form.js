@@ -80,7 +80,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
 
                     <Input
                         placeholdero=''
-                        label='Title'
+                        label='Title of Post'
                         onChangeText={handleChange('title')}
                         onBlur={handleBlur('title')}
                         value={values.title}
@@ -92,7 +92,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
 
                     <Input
                         placeholdero='Email'
-                        label='Email*'
+                        label='Email'
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
                         value={values.email}
@@ -102,7 +102,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
                     />
 
                     <Input
-                        placeholdero='Contact'
+                        placeholdero='Contact Number'
                         label='Contact*'
                         onChangeText={handleChange('contactNo')}
                         onBlur={handleBlur('contactNo')}
@@ -113,7 +113,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
                     />
 
                     <Input
-                        placeholdero='City*'
+                        placeholdero='City'
                         label='City*'
                         onChangeText={handleChange('city')}
                         onBlur={handleBlur('city')}
@@ -125,7 +125,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
 
                     <Input
 
-                        label='Discription*'
+                        label='Discription'
                         onChangeText={handleChange('discription')}
                         onBlur={handleBlur('discription')}
                         value={values.discription}
@@ -137,7 +137,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
 
 
                     <Input
-                        placeholdero='Address*'
+                        placeholdero='Address'
                         label='Address*'
                         onChangeText={handleChange('address')}
                         onBlur={handleBlur('address')}
@@ -148,7 +148,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
 
                     <Input
                         placeholdero=''
-                        label='Price*'
+                        label='Price'
                         onChangeText={handleChange('price')}
                         onBlur={handleBlur('price')}
                         value={values.price}
@@ -158,7 +158,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
                     />
                     <Input
                         placeholdero=''
-                        label='Area*'
+                        label='Area'
                         onChangeText={handleChange('area')}
                         onBlur={handleBlur('area')}
                         value={values.area}
@@ -168,7 +168,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
                     />
                     <Input
                         placeholdero=''
-                        label='Rooms*'
+                        label='Rooms'
                         onChangeText={handleChange('rooms')}
                         onBlur={handleBlur('room')}
                         value={values.rooms}
@@ -176,7 +176,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
                         error={touched.rooms && errors.rooms}
 
                     />
-                    <Input
+                    {/* <Input
                         placeholdero=''
                         label='Kitchen*'
                         onChangeText={handleChange('kitchen')}
@@ -185,10 +185,10 @@ export default function Form({ navigation, setNewPost, newPost }) {
                         keyboardType='numeric'
                         error={touched.kitchen && errors.kitchen}
 
-                    />
+                    /> */}
                     <Input
                         placeholdero=''
-                        label='Bath*'
+                        label='Bath'
                         onChangeText={handleChange('bath')}
                         onBlur={handleBlur('bath')}
                         value={values.bath}

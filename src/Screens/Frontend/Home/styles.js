@@ -35,4 +35,18 @@ export const styles=StyleSheet.create({
         // shadowRadius: 3,
     
       },
+      scrollView:{
+        width:400,
+        // marginVertical:50,
+        // borderWidth:1,
+        paddingVertical:10,
+        shadowColor: "#000",
+        shadowOpacity: 0.5,
+        shadowOffset: {
+            width: 10,
+            height: 10,
+        }
+
+
+      }
 })

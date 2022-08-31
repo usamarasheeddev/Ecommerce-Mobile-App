@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     flexContainer: {
         flex: 1,
-        marginBottom:10
+        marginBottom:10,
+        // alignItems:'center'
     },
     heading: {
         fontSize: 18,

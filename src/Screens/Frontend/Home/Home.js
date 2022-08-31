@@ -1,4 +1,5 @@
-import { View, Text, ScrollView, TouchableWithoutFeedback, ActivityIndicator, Image } from 'react-native'
+import { View, Text, ScrollView, TouchableWithoutFeedback,
+   ActivityIndicator, Image,StatusBar } from 'react-native'
 import React from 'react'
 import { usePostContext } from '../../../contexts/PostContext'
 import { styles } from './styles'
@@ -32,37 +33,41 @@ export default function Home({ navigation }) {
   return (
     <ScrollView >
       <View style={styles.flexContainer}>
+      <StatusBar barStyle="light-content" backgroundColor="#40916c" />
+
         {!isLoadingPost ?
           <ActivityIndicator style={{ marginTop: 350 }} size='large' />
           : <>
-            <View style={{ width: 330 }}>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              <View style={styles.scrollView}>
+            <Text variant='headlineSmall' style={{ fontWeight: 'bold' ,textAlign:'left'}}> Suggestions</Text>
 
-              <View style={{ paddingVertical: 10, marginVertical: 10 }}>
-                <Text variant='headlineSmall' style={{ fontWeight: 'bold' }}> This Might Help You</Text>
-              </View>
-              <View >
-                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                  <View style={{ justifyContent: 'center', alignItems: 'center', }}>
-                    <Ionicons name='card' color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} size={45} />
-                    <Text style={{ textAlign: 'center' }}>Find Agent</Text>
-                  </View>
-                  <View>
-                    <Ionicons name='map' size={45} color='#40916c'
-                      style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }}
-                    />
-                    <Text style={{ textAlign: 'center', }}>Maps</Text>
-                  </View>
-                  <View>
-                    <Ionicons name='home' size={45} color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} />
-                    <Text style={{ textAlign: 'center' }}>Houses</Text>
-                  </View>
-                  <View>
-                    <Ionicons name='newspaper' size={45} color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} />
-                    <Text style={{ textAlign: 'center' }}>News</Text>
+                <View style={{ marginVertical: 10 }}>
+                </View>
+                <View >
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between',borderColor:'#adb5bd' }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', }}>
+                      <Ionicons name='card' color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} size={45} />
+                    </View>
+                    <View>
+                      <Ionicons name='map' size={45} color='#40916c'
+                        style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }}
+                      />
+                    </View>
+                    <View>
+                      <Ionicons name='home' size={45} color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} />
+                      
+                    </View>
+                    <View>
+                      <Ionicons name='newspaper' size={45} color='#40916c' style={{ backgroundColor: '#cfe1b9', padding: 10, borderRadius: 10, marginBottom: 5 }} />
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
+            </ScrollView>
 
 
             {

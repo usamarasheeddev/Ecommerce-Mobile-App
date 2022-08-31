@@ -17,12 +17,12 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
         <ScrollView>
 
             <View style={styles.flexContainer}>
-                <View >
+                <View style={{alignItems:'center'}}>
                     <Image sty
                         source={{
                             uri: item.newPost.url
                         }}
-                        style={{ flex: 1, width: "100%", borderRadius: 20, height: 370, resizeMode: 'contain', marginTop: 2, resizeMode: 'contain' }}
+                        style={{ flex: 1, width: "98%", borderRadius: 20, height: 270, resizeMode: 'contain', marginTop: 2, resizeMode: 'contain' }}
 
                     />
                     <View style={styles.textBox}>
