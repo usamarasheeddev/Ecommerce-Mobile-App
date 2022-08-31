@@ -1,29 +1,33 @@
 // import React from 'react'
-import { View, Text, StyleSheet, ImageBackground, Button } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import * as React from 'react';
-import { TextInput } from 'react-native-paper';
 import auth from '@react-native-firebase/auth';
 import { useAuthContext } from '../../contexts/AuthContext';
-
+import { Formik } from 'formik'
+import * as Yup from 'yup'
+import Input from '../Components/Input';
+import { styles } from './styles';
 
 const initialState = { email: '', password: '' }
 export default function Login({ navigation }) {
-  const [showPassword, setShowPassword] = React.useState(false)
-  const [state, setState] = React.useState(initialState)
+
   const { dispatch } = useAuthContext()
 
-  const handleChange = (name, value) => {
-    setState(s => ({ ...s, [name]: value }))
-
+  const userCreds = {
+    email: '', password: ''
   }
 
+  const validationSchema = Yup.object({
+    email: Yup.string().email('Invalid Email').required('Email required!'),
+    password: Yup.string().trim().min(8, "Invalid Password").required('Password required')
 
-  const handleLogin = () => {
-    let { email, password } = state
+  })
 
-    if (!email) return alert("Email is invalid")
-    if (!password) return alert("Password is invalid")
-    console.log(state)
+
+
+  const handleLogin = (values) => {
+    const { email, password } = values
+
     auth()
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -50,55 +54,51 @@ export default function Login({ navigation }) {
   return (
 
     <View style={styles.flexContainer}>
-      {/* <ImageBackground source={bg} style={styles.img} > */}
+      <Formik
+        initialValues={userCreds} validationSchema={validationSchema}
+        onSubmit={(values, formikActions) => {
+          handleLogin(values)
+        }}
+      >
 
-      <View>
-
-        <View><Text style={styles.heading}>Login</Text></View>
-        <View style={styles.screenStyle}>
-
-          <TextInput
-            style={{ marginTop: 10 }}
-            mode="outlined"
-            label="Email"
-            keyboardType='email-address'
-            autoCapitalize='none'
-            // value={text}
-            name="email"
-            onChangeText={value => handleChange("email", value)}
-            outlineColor='#0466c8'
-            activeOutlineColor='#4361ee'
-          />
-          <TextInput
-            style={{ marginTop: 10 }}
-            mode="outlined"
-            label="Password"
-            // value={text}
-            autoCapitalize='none'
-            onChangeText={value => handleChange("password", value)}
-            outlineColor='#0466c8'
-            activeOutlineColor='#4361ee'
-            secureTextEntry={showPassword}
-            right={<TextInput.Icon name={showPassword ? 'eye' : 'eye-off'}
-              onPress={() => setShowPassword(!showPassword)} />}
-            fontSize=''
-          />
+        {({ handleChange, touched, handleBlur, isSubmitting, handleSubmit, values, errors }) => {
 
 
-          <Text style={{ textAlign: "right", marginTop: 15 }}
-            onPress={() => navigation.navigate('forgetPassword')}
-          >Forget password?</Text>
+          return <>
+          <Text style={{fontSize:26,fontWeight:'bold',textAlign:'center',marginBottom:10}} >Login</Text>
+            <Input
+              placeholdero='Email'
+              label='Email'
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+              keyboardType='email-address'
+              error={touched.email && errors.email}
 
+            />
+            <Input
+              placeholdero='Email'
+              label='Password'
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              secureTextEntry
+              
+              value={values.password}
+              error={touched.password && errors.password}
 
-        </View>
-        <View style={{ marginTop: 30 }}>
-          <Button
-            onPress={handleLogin}
-            title='Login'
-          />
-        </View>
+            />
+            <TouchableOpacity style={{
+              width: 320, marginTop: 30,
+              alignSelf: 'center'
+            }}
+              onPress={handleSubmit}
+            >
+              <Text style={{ textAlign: 'center', padding: 10, backgroundColor: '#40916c', color: 'white' }}>
+                Login
+              </Text>
+            </TouchableOpacity>
 
-        <View >
+            <View >
           <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}
             onPress={() => navigation.navigate('SignUp', {
               screen: 'SignUp',
@@ -109,41 +109,14 @@ export default function Login({ navigation }) {
             Don't have an account?</Text>
         </View>
 
-      </View>
-      {/* </ImageBackground> */}
+          </>
+        }
+
+        }
+
+
+      </Formik>
+
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  flexContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: 'center'
-  },
-  img: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  heading: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    textAlign: 'center',
-    fontFamily: 'Roboto'
-
-  },
-  screenStyle: {
-    width: 300,
-
-  },
-  inputStyle: {
-    fontSize: "10",
-
-  }
-  , text: {
-    textAlign: 'center'
-  }
-
-
-})

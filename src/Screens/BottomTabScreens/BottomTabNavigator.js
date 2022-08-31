@@ -104,7 +104,7 @@ export default function BottomTabScreen({ navigation }) {
                 <Tab.Screen name='Account' component={UserScreenNavigator}
                     options={{
                         tabBarIcon: (({ color }) => <User name='user' color={color} size={25} />),
-                        headerTitleAlign: 'center',
+                        headerTitleAlign: 'center',tabBarHideOnKeyboard:true
                        
 
                     }}

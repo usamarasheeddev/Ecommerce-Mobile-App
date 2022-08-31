@@ -15,10 +15,6 @@ export default function Form({ navigation, setNewPost, newPost }) {
         area: '', rooms: '', bath: '', kitchen: '', discription: '',price:''
     }
 
-    // React.useEffect(() => {
-    //     alert(postImage)
-    // }, [postImage])
-
 
     const uploadToFirebase = async (data) => {
         try {
