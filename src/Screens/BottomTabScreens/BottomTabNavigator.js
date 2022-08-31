@@ -5,7 +5,6 @@ import FavuriteItems from './FavuriteItems/FavuriteItems';
 import HomeScreenNavigator from '../Frontend/HomeScreenNavigator';
 import SearchTab from './SearchTab.js/SearchTab';
 import AddPost from './Post/AddPost';
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Home from 'react-native-vector-icons/SimpleLineIcons'
 import Heart from 'react-native-vector-icons/SimpleLineIcons'
 import Search from 'react-native-vector-icons/Ionicons'
@@ -23,22 +22,11 @@ export default function BottomTabScreen({ navigation }) {
     const { isAuthenticated, dispatch } = useAuthContext()
 
 
-    const handleLogout = () => {
-        console.log(isAuthenticated)
-        auth().signOut()
-            .then(() => {
-                dispatch({ type: "LOGOUT" })
-            })
-            .catch((err) => {
-                console.error(err)
-                alert("Something went wrong")
-            })
-    }
 
 
 
     return (
-        <Tab.Navigator initialRouteName='Home'
+        <Tab.Navigator initialRouteName='FavuriteItems'
         
             screenOptions={{
                 //bottom tab styling
@@ -71,7 +59,7 @@ export default function BottomTabScreen({ navigation }) {
 
                 <Tab.Screen name='Feed' component={HomeScreenNavigator}
                     options={{
-                        // headerShown: false,
+                        headerShown: false,
                         tabBarIcon: (({ color }) => <Home name='home' color={color} size={25}
                         />),
                         headerStyle:{
@@ -104,12 +92,12 @@ export default function BottomTabScreen({ navigation }) {
                     }} />
 
 
-                <Tab.Screen name='Favurite Items' component={FavuriteItemsNavigator}
+                <Tab.Screen name='FavuriteItems' component={FavuriteItemsNavigator}
                     options={{
                         // tabBarBadge: 1,
                         tabBarIcon: (({ color }) => <Heart name='heart' color={color} size={26} />),
                         tabBarActiveTintColor: 'red', headerTitleAlign: 'center',
-                        headerShown: false
+                        headerShown: false,
                     }}
                 />
 
@@ -117,15 +105,7 @@ export default function BottomTabScreen({ navigation }) {
                     options={{
                         tabBarIcon: (({ color }) => <User name='user' color={color} size={25} />),
                         headerTitleAlign: 'center',
-                        headerRight: () => (
-                            <IconButton
-                                icon="logout"
-                                iconColor={MD3Colors.error50}
-                                size={26}
-                                onPress={handleLogout}
-                            />
-                        ),
-                    
+                       
 
                     }}
 

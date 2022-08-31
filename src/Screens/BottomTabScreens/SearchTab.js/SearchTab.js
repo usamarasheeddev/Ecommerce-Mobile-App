@@ -78,13 +78,7 @@ export default function SearchTab({ navigation }) {
 
 
                   <View style={[styles.box, styles.shadowProp]}>
-                    <IconButton
-                      icon={!item.isLiked ? "heart-outline" : "heart"}
-                      iconColor={MD3Colors.error50}
-                      size={20}
-                      onPress={() => handleFavurite(item.id)}
-                      style={{ position: 'absolute', zIndex: 1, top: 0, left: 90 }}
-                    />
+
 
                     {/* //PRODUCT iMAGE */}
                     <View style={{ flexDirection: 'row', alignItems: "center" }}>

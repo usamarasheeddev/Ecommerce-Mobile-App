@@ -31,6 +31,12 @@ export default function Home({ navigation }) {
 
 
   return (
+
+    <>
+    <View>
+      <Text style={{textAlign:'center',paddingVertical:15,fontWeight:'bold',fontSize:16
+    }}>Welcom To Nature House</Text>
+    </View>
     <ScrollView >
       <View style={styles.flexContainer}>
       <StatusBar barStyle="light-content" backgroundColor="#40916c" />
@@ -130,5 +136,6 @@ export default function Home({ navigation }) {
       </View>
 
     </ScrollView>
+    </>
   )
 }
