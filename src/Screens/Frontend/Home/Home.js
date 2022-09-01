@@ -44,12 +44,12 @@ export default function Home({ navigation }) {
         {!isLoadingPost ?
           <ActivityIndicator style={{ marginTop: 350 }} size='large' />
           : <>
+              <Text variant='headlineSmall' style={{ fontWeight: 'bold' ,textAlign:'left'}}> Suggestions</Text>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
               <View style={styles.scrollView}>
-            <Text variant='headlineSmall' style={{ fontWeight: 'bold' ,textAlign:'left'}}> Suggestions</Text>
 
                 <View style={{ marginVertical: 10 }}>
                 </View>

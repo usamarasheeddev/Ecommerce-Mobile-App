@@ -26,7 +26,7 @@ export default function BottomTabScreen({ navigation }) {
 
 
     return (
-        <Tab.Navigator initialRouteName='FavuriteItems'
+        <Tab.Navigator initialRouteName='Home'
         
             screenOptions={{
                 //bottom tab styling
