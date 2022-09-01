@@ -1,5 +1,5 @@
 // import React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 import * as React from 'react';
 import { TextInput } from 'react-native-paper';
 import { useAuthContext } from '../../contexts/AuthContext';
@@ -14,7 +14,8 @@ import { styles } from './styles';
 
 export default function SignUp({ navigation }) {
 
-  const { dispatch } = useAuthContext
+  const { dispatch } = useAuthContext()
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const userCreds = {
     email: '', password: '', username: ''
@@ -28,30 +29,33 @@ export default function SignUp({ navigation }) {
   })
 
   const handleSignUp = (values) => {
-    const { email, password, username } = values
-
+    setIsLoading(true)
+    const { email, password,username } = values
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user
         // dispatch({ type: "LOGIN", payload: { user } })
-        createUserProfile(user)
+        createUserProfile(user,username)
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
+          setIsLoading(false)
           console.log('That email address is already in use!');
         }
 
         if (error.code === 'auth/invalid-email') {
           console.log('That email address is invalid!');
+          setIsLoading(false)
         }
 
         console.error(error);
       })
+    setIsLoading(true)
   }
 
 
-  const createUserProfile = async (user) => {
+  const createUserProfile = async (user,username) => {
     let formData = {
       userName: username,
       email: user.email,
@@ -82,72 +86,79 @@ export default function SignUp({ navigation }) {
         initialValues={userCreds} validationSchema={validationSchema}
         onSubmit={(values, formikActions) => {
           handleSignUp(values)
-          formikActions.resetForm()
+          // formikActions.resetForm()
         }}
       >
 
         {({ handleChange, touched, handleBlur, isSubmitting, handleSubmit, values, errors }) => {
 
 
-          return <>
-            <Text style={{
-              fontSize: 26, fontWeight: 'bold',
-              textAlign: 'center', marginBottom: 10
-            }} >SignUp</Text>
-            <Input
 
-              label='Username'
-              onChangeText={handleChange('username')}
-              onBlur={handleBlur('username')}
-              value={values.username}
-              // keyboardType='email-address'
-              error={touched.username && errors.username}
+          return <>{
+            isLoading ?
+              <ActivityIndicator size="large" color="#40916c" style={{ marginTop: 350 }} />
 
-            />
-            <Input
-              placeholdero='Email'
-              label='Email'
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
-              keyboardType='email-address'
-              error={touched.email && errors.email}
+              : <>
+                <Text style={{
+                  fontSize: 26, fontWeight: 'bold',
+                  textAlign: 'center', marginBottom: 10
+                }} >SignUp</Text>
+                <Input
 
-            />
-            <Input
-              placeholdero='Email'
-              label='Password'
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              secureTextEntry
+                  label='Username'
+                  onChangeText={handleChange('username')}
+                  onBlur={handleBlur('username')}
+                  value={values.username}
+                  // keyboardType='email-address'
+                  error={touched.username && errors.username}
 
-              value={values.password}
-              error={touched.password && errors.password}
+                />
+                <Input
+                  placeholdero='Email'
+                  label='Email'
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                  keyboardType='email-address'
+                  autoCapitalize='none'
+                  error={touched.email && errors.email}
 
-            />
-            <TouchableOpacity style={{
-              width: 320, marginTop: 30,
-              alignSelf: 'center'
-            }}
-              onPress={handleSubmit}
-            >
-              <Text style={{ textAlign: 'center', padding: 10, backgroundColor: '#40916c', color: 'white' }}>
-                Login
-              </Text>
-            </TouchableOpacity>
+                />
+                <Input
+                  placeholdero='Email'
+                  label='Password'
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  secureTextEntry
+                  autoCapitalize='none'
+                  value={values.password}
+                  error={touched.password && errors.password}
 
-            <View >
-              <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}
-                onPress={() => navigation.navigate('Login', {
-                  screen: 'Login',
-                  initial: false,
-                })}
-              >
+                />
+                <TouchableOpacity style={{
+                  width: 320, marginTop: 30,
+                  alignSelf: 'center'
+                }}
+                  onPress={handleSubmit}
+                >
+                  <Text style={{ textAlign: 'center', padding: 10, backgroundColor: '#40916c', color: 'white' }}>
+                    SignUp
+                  </Text>
+                </TouchableOpacity>
 
-                Already have an account?</Text>
-            </View>
+                <View >
+                  <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50, color: '#40916c' }}
+                    onPress={() => navigation.navigate('Login', {
+                      screen: 'Login',
+                      initial: false,
+                    })}
+                  >
 
-          </>
+                    Already have an account?</Text>
+                </View>
+
+              </>
+          }</>
         }
 
         }

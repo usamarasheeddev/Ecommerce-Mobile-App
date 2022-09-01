@@ -1,5 +1,5 @@
 // import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
 import * as React from 'react';
 import auth from '@react-native-firebase/auth';
 import { useAuthContext } from '../../contexts/AuthContext';
@@ -12,6 +12,7 @@ const initialState = { email: '', password: '' }
 export default function Login({ navigation }) {
 
   const { dispatch } = useAuthContext()
+  const [isLoading, setIsLoading] = React.useState(false)
 
   const userCreds = {
     email: '', password: ''
@@ -27,7 +28,7 @@ export default function Login({ navigation }) {
 
   const handleLogin = (values) => {
     const { email, password } = values
-
+    setIsLoading(true)
     auth()
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -39,84 +40,95 @@ export default function Login({ navigation }) {
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
+          setIsLoading(false)
           console.log('That email address is already in use!');
         }
 
         if (error.code === 'auth/invalid-email') {
+          setIsLoading(false)
           console.log('That email address is invalid!');
         }
 
         console.error(error);
       })
 
+    setIsLoading(true)
   }
 
   return (
-
-    <View style={styles.flexContainer}>
-      <Formik
-        initialValues={userCreds} validationSchema={validationSchema}
-        onSubmit={(values, formikActions) => {
-          handleLogin(values)
-        }}
-      >
-
-        {({ handleChange, touched, handleBlur, isSubmitting, handleSubmit, values, errors }) => {
+    <>{isLoading ?
+      <ActivityIndicator size='large' color="#40916c"  style={{marginTop:350}}/>
 
 
-          return <>
-          <Text style={{fontSize:26,fontWeight:'bold',textAlign:'center',marginBottom:10}} >Login</Text>
-            <Input
-              placeholdero='Email'
-              label='Email'
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
-              keyboardType='email-address'
-              error={touched.email && errors.email}
 
-            />
-            <Input
-              placeholdero='Email'
-              label='Password'
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              secureTextEntry
-              
-              value={values.password}
-              error={touched.password && errors.password}
+      : <View style={styles.flexContainer}>
+        <Formik
+          initialValues={userCreds} validationSchema={validationSchema}
+          onSubmit={(values, formikActions) => {
+            handleLogin(values)
+          }}
+        >
 
-            />
-            <TouchableOpacity style={{
-              width: 320, marginTop: 30,
-              alignSelf: 'center'
-            }}
-              onPress={handleSubmit}
-            >
-              <Text style={{ textAlign: 'center', padding: 10, backgroundColor: '#40916c', color: 'white' }}>
-                Login
-              </Text>
-            </TouchableOpacity>
-
-            <View >
-          <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50 }}
-            onPress={() => navigation.navigate('SignUp', {
-              screen: 'SignUp',
-              initial: false,
-            })}
-          >
-
-            Don't have an account?</Text>
-        </View>
-
-          </>
-        }
-
-        }
+          {({ handleChange, touched, handleBlur, isSubmitting, handleSubmit, values, errors }) => {
 
 
-      </Formik>
+            return <>
+              <Text style={{ fontSize: 26, fontWeight: 'bold', textAlign: 'center', marginBottom: 10 }} >Login</Text>
+              <Input
+                placeholdero='Email'
+                label='Email'
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                autoCapitalize='none'
+                keyboardType='email-address'
+                error={touched.email && errors.email}
 
-    </View>
+              />
+              <Input
+                placeholdero='Email'
+                label='Password'
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                secureTextEntry
+                autoCapitalize='none'
+                value={values.password}
+                error={touched.password && errors.password}
+
+              />
+              <TouchableOpacity style={{
+                width: 320, marginTop: 30,
+                alignSelf: 'center'
+              }}
+                onPress={handleSubmit}
+              >
+                <Text style={{ textAlign: 'center', padding: 10, backgroundColor: '#40916c', color: 'white' }}>
+                  Login
+                </Text>
+              </TouchableOpacity>
+
+              <View >
+                <Text style={{ textAlign: "center", fontSize: 15, marginTop: 50, color: '#40916c' }}
+                  onPress={() => navigation.navigate('SignUp', {
+                    screen: 'SignUp',
+                    initial: false,
+                  })}
+                >
+
+                  Don't have an account?</Text>
+              </View>
+
+            </>
+          }
+
+          }
+
+
+        </Formik>
+
+      </View>
+
+
+    }</>
   )
 }
