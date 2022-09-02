@@ -27,8 +27,8 @@ export default function Login({ navigation }) {
 
 
   const handleLogin = (values) => {
-    const { email, password } = values
     setIsLoading(true)
+    const { email, password } = values
     auth()
       .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -57,7 +57,7 @@ export default function Login({ navigation }) {
 
   return (
     <>{isLoading ?
-      <ActivityIndicator size='large' color="#40916c"  style={{marginTop:350}}/>
+      <ActivityIndicator size='large' color="#40916c" style={{ marginTop: 350 }} />
 
 
 

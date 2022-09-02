@@ -39,78 +39,78 @@ export default function FavuriteItems({ navigation }) {
         console.error(err)
       })
   }
-let arr=[]
-  const getFromDb = () => {
-    firestore().collection('favuriteItems').doc(auth().currentUser.uid).collection('likedPosts')
-    .onSnapshot((snapshot) => {
-        setComments(snapshot.docs.map((doc) =>
-        doc.data()))
- })
-}
+  let arr = []
+  const getFromDb = async() => {
+    alert('working')
+    let data = await firestore().collection(`favuriteItems/pnm8jwKXg2evOwd8j9rQUzeoZbJ2
+    /likedPosts/XU0JoR35NXkrYZFWq0wS`).
+      get()
+    console.log(data)
+  }
+  return (
+    <ScrollView>
+      {post.filter(item => item.isLiked == true).length == 0 ?
+        < Text onPress={() => getFromDb()} style={{
+          textAlign: 'center', fontWeight: 'bold',
+          marginTop: 350
+        }}> No item found  </Text >
 
-return (
-  <ScrollView>
-    {post.filter(item => item.isLiked == true).length == 0 ?
-      < Text style={{
-        textAlign: 'center', fontWeight: 'bold',
-        marginTop: 350
-      }}> No item found  </Text >
 
+        : <View style={styles.flexContainer}>
 
-      : <View style={styles.flexContainer}>
-        {post.filter(item => item.isLiked == true).map((item, i) => {
-          return <TouchableWithoutFeedback key={i} onPress={() => navigation.navigate('ProductDetails', { item })}>
-            <View style={[styles.box, styles.shadowProp]}>
+          {post.filter(item => item.isLiked == true).map((item, i) => {
+            return <TouchableWithoutFeedback key={i} onPress={() => navigation.navigate('ProductDetails', { item })}>
+              <View style={[styles.box, styles.shadowProp]}>
 
-              <IconButton
-                icon={!item.isLiked ? "heart-outline" : "heart"}
-                iconColor={MD3Colors.error50}
-                size={20}
-                onPress={() => handleFavurite(item.id)}
-                style={{ position: 'absolute', zIndex: 1, top: -5, left: 105 }}
-              />
-              {/* //PRODUCT iMAGE */}
-              <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                <Image
-                  source={{
-                    uri: item.newPost.url
-                  }}
-                  style={{ width: 148, borderRadius: 20, height: 130, objectFit: "cover" }}
-
+                <IconButton
+                  icon={!item.isLiked ? "heart-outline" : "heart"}
+                  iconColor={MD3Colors.error50}
+                  size={20}
+                  onPress={() => handleFavurite(item.id)}
+                  style={{ position: 'absolute', zIndex: 1, top: -5, left: 105 }}
                 />
-                <View style={styles.textBox}>
-                  <Text style={{ fontWeight: 'bold', fontSize: 14 }}>{item.title}</Text>
-                  <Text style={{ fontWeight: 'bold', fontSize: 16 }}>PKR  {item.price}</Text>
-                  <Text style={{ fontWeight: 'bold', fontSize: 12, marginTop: 5 }}>{item.address}</Text>
+                {/* //PRODUCT iMAGE */}
+                <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                  <Image
+                    source={{
+                      uri: item.newPost.url
+                    }}
+                    style={{ width: 148, borderRadius: 20, height: 130, objectFit: "cover" }}
+
+                  />
+                  <View style={styles.textBox}>
+                    <Text style={{ fontWeight: 'bold', fontSize: 14 }}>{item.title}</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 16 }}>PKR  {item.price}</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 12, marginTop: 5 }}>{item.address}</Text>
 
 
 
-                  <View style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between', width: 130, marginTop: 10
-                  }}>
-                    <Icon name='bed' size={18} /><Text>{item.rooms}</Text>
-                    <Icon name='bathtub-outline' size={18} /><Text>{item.bath}</Text>
-                    <Icon name='crop-square' size={18} /><Text>{item.area}</Text>
+                    <View style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between', width: 130, marginTop: 10
+                    }}>
+                      <Icon name='bed' size={18} /><Text>{item.rooms}</Text>
+                      <Icon name='bathtub-outline' size={18} /><Text>{item.bath}</Text>
+                      <Icon name='crop-square' size={18} /><Text>{item.area}</Text>
+                    </View>
+                  </View>
+                  <View>
+
+
                   </View>
                 </View>
-                <View>
 
-
-                </View>
               </View>
 
-            </View>
+            </TouchableWithoutFeedback>
+          })
 
-          </TouchableWithoutFeedback>
-        })
+          }
 
-        }
+        </View>
+      }
 
-      </View>
-    }
+    </ScrollView >
 
-  </ScrollView >
-
-)
+  )
 }
