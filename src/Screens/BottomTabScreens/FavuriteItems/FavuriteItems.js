@@ -40,12 +40,14 @@ export default function FavuriteItems({ navigation }) {
       })
   }
   let arr = []
-  const getFromDb = async() => {
+  const getFromDb = async () => {
     alert('working')
-    let data = await firestore().collection(`favuriteItems/pnm8jwKXg2evOwd8j9rQUzeoZbJ2
-    /likedPosts/XU0JoR35NXkrYZFWq0wS`).
-      get()
-    console.log(data)
+    firestore().collection('posts').doc(auth().currentUser.uid).collection('likedPosts')
+      .onSnapshot((snapshot) => {
+        console.log(snapshot.docs.map((doc) =>
+          doc.id))
+      })
+
   }
   return (
     <ScrollView>

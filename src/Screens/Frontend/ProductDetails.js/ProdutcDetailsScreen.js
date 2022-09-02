@@ -3,7 +3,6 @@ import React from 'react'
 import { styles } from './styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useAuthContext } from '../../../contexts/AuthContext'
-import Login from '../../AuthScreens/Login'
 import AuthScreenNavigator from '../../AuthScreens/AuthScreenNavigator'
 
 export default function ProdutcDetailsScreen({ navigation, route }) {
