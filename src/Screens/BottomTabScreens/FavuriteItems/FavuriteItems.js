@@ -42,12 +42,11 @@ export default function FavuriteItems({ navigation }) {
   let arr = []
   const getFromDb = async () => {
     alert('working')
-    firestore().collection('posts').doc(auth().currentUser.uid).collection('likedPosts')
-      .onSnapshot((snapshot) => {
-        console.log(snapshot.docs.map((doc) =>
-          doc.id))
-      })
-
+    firestore().collection(`favuriteItems/${auth().currentUser.uid}/likedPosts`).get().then((CollectionSnapshot) => {
+      CollectionSnapshot.forEach((subDoc) => {
+        console.log(subDoc.data());
+      });
+    });
   }
   return (
     <ScrollView>
