@@ -8,8 +8,10 @@ import AuthContextProvider from './src/contexts/AuthContext';
 import ScreensNavigator from './src/Screens/ScreensNavigator';
 import FavuriteItemsContextProvider from './src/contexts/FavuriteItemsContext';
 import SplashScreen from 'react-native-splash-screen'
-
 import PostContextProvider from './src/contexts/PostContext';
+//nativebase
+import { NativeBaseProvider } from "native-base";
+
 
 const App = () => {
   useEffect(() => {
@@ -18,12 +20,20 @@ const App = () => {
 
 
   return (
+
+
     <AuthContextProvider>
       <PostContextProvider>
         <FavuriteItemsContextProvider>
           <NavigationContainer>
 
-            <ScreensNavigator />
+            <NativeBaseProvider>
+
+
+              <ScreensNavigator />
+
+
+            </NativeBaseProvider>
 
           </NavigationContainer>
         </FavuriteItemsContextProvider>

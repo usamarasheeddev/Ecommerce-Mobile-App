@@ -1,35 +1,18 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import { Button, Menu, Divider, Provider } from 'react-native-paper';
+import React from 'react';
+import { Menu, Box ,Pressable,Button} from 'native-base';
 
-const MenuComponent = () => {
-  const [visible, setVisible] = React.useState(true);
-
-  const openMenu = () => setVisible(true);
-
-  const closeMenu = () => setVisible(false);
-
-  return (
-    <Provider>
-      <View
-        style={{
-          paddingTop: 50,
-          flexDirection: 'row',
-          justifyContent: 'center',
-          color: 'red', borderWidth: 1
-        }}>
-        <Menu
-          visible={visible}
-          onDismiss={closeMenu}
-          anchor={<Button onPress={openMenu}>Show menu</Button>} style={{color:'red'}}>
-          <Menu.Item leadingIcon="redo" onPress={() => { }} title="Redo" />
-          <Menu.Item onPress={() => { }} title="Item 2" />
-          <Divider />
-          <Menu.Item onPress={() => { }} title="Item 3" />
-        </Menu>
-      </View>
-    </Provider>
-  );
-};
-
-export default MenuComponent;
+export default function MenuComponent() {
+  return <Box w="80%" alignItems="center">
+  <Menu shadow={2} w="190" trigger={triggerProps => {
+      return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
+              <Button  />
+            </Pressable>;
+    }}>
+        <Menu.Item>Arial</Menu.Item>
+        <Menu.Item>Nunito Sans</Menu.Item>
+        <Menu.Item>Roboto</Menu.Item>
+        <Menu.Item>Poppins</Menu.Item>
+        
+      </Menu>
+  </Box>;
+}

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView ,Bu} from 'react-native'
 import auth from '@react-native-firebase/auth';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import firestore from "@react-native-firebase/firestore"
 import UserPosts from './UserPosts';
-import MenuComponent from '../../Components/MenuComponent';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
 export default function UserAccount({ navigation }) {
@@ -51,7 +51,7 @@ export default function UserAccount({ navigation }) {
         : <View style={{ padding: 10 }}>
           <View>
             <View style={{height:20}}> 
-              <MenuComponent />
+              
             </View>
             {/* <TouchableOpacity onPress={() => handleLogout()} style={{ backgroundColor: '#a4161a', marginTop: 10 }}>
 
@@ -73,7 +73,6 @@ export default function UserAccount({ navigation }) {
 
             </ScrollView>
           </View>
-
 
 
 

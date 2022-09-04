@@ -1,4 +1,4 @@
-import { View, Text, TouchableWithoutFeedback, Image } from 'react-native'
+import { View, Text, TouchableWithoutFeedback, Image, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import { styles } from './style'
 import { usePostContext } from '../../../contexts/PostContext'
@@ -7,7 +7,7 @@ import auth from '@react-native-firebase/auth'
 
 
 export default function UserPosts() {
-    const { post } = usePostContext()
+    const { post, handleDel } = usePostContext()
 
     const userId = auth().currentUser.uid
 
@@ -15,7 +15,7 @@ export default function UserPosts() {
     return (
         <View>
             {post.filter((doc) => doc.userId == userId).length == 0 ?
-                <Text style={{fontWeight:'bold',marginTop:200 }} 
+                <Text style={{ fontWeight: 'bold', marginTop: 200 }}
                 >No post yet</Text>
 
 
@@ -27,6 +27,34 @@ export default function UserPosts() {
 
 
                             <View style={[styles.box, styles.shadowProp]}>
+
+                                {/* Delete post module */}
+                                <TouchableOpacity
+                                    style={{
+                                        position: 'absolute', right: 10, top: 4
+                                    }} onPress={() => {
+                                        Alert.alert(
+                                            "Delete",
+                                            "Are you sure to delete post?",
+                                            [
+
+                                                {
+                                                    text: "Cancel",
+                                                    onPress: () => console.log("Cancel Pressed"),
+                                                    style: "cancel"
+                                                },
+                                                { text: "OK", onPress: () => { handleDel(item) } }
+                                            ]
+                                        );
+                                    }}
+                                >
+                                    <Icon
+                                        name='delete'
+                                        color='red'
+                                        size={22}
+                                    />
+                                </TouchableOpacity>
+
 
                                 {/* //PRODUCT iMAGE */}
                                 <View style={{ flexDirection: 'row', alignItems: "center" }}>
