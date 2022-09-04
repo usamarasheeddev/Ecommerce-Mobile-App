@@ -24,30 +24,30 @@ export default function FavuriteItems({ navigation }) {
 
   // Add Favurite Item
   const addFavuriteItem = async (id) => {
-    console.log("ggggg")
     await firestore()
 
-      .collection('favuriteItems').doc(auth().currentUser.uid).collection('likedPosts')
+      .collection('favuriteItems').doc(auth().currentUser.uid).collection('likedPosts').doc(id)
       .add({
-        FavuriteItemId: id
+        isLiked: true
 
       })
       .then(() => {
-        console.log('User added!');
-        alert('liked')
+        console.log(id, ' Liked');
       }).catch(err => {
         console.error(err)
       })
   }
   let arr = []
   const getFromDb = async () => {
-    alert('working')
-    firestore().collection(`favuriteItems/${auth().currentUser.uid}/likedPosts`).get().then((CollectionSnapshot) => {
-      CollectionSnapshot.forEach((subDoc) => {
-        console.log(subDoc.data());
-      });
-    });
+    await firestore().collection('favuriteItems')
+      .doc(auth().currentUser.uid)
+      .collection('likedPosts').get().then((docs) => {
+        docs.forEach((doc) => { arr.push({ ...doc.data(), id: doc.id }) })
+      })
+    console.log(arr)
   }
+
+
   return (
     <ScrollView>
       {post.filter(item => item.isLiked == true).length == 0 ?
@@ -67,7 +67,7 @@ export default function FavuriteItems({ navigation }) {
                   icon={!item.isLiked ? "heart-outline" : "heart"}
                   iconColor={MD3Colors.error50}
                   size={20}
-                  onPress={() => handleFavurite(item.id)}
+                  onPress={() => addFavuriteItem(item.id)}
                   style={{ position: 'absolute', zIndex: 1, top: -5, left: 105 }}
                 />
                 {/* //PRODUCT iMAGE */}

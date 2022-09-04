@@ -2,9 +2,6 @@ import { View, Text, Button, Image, ScrollView, Alert, ActivityIndicator } from 
 import React, { useState, useCallback } from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
-import { useAuthContext } from '../../../contexts/AuthContext';
-import { usePostContext } from '../../../contexts/PostContext';
-import AuthScreenNavigator from '../../AuthScreens/AuthScreenNavigator';
 
 import Form from './Form'
 let options = {
@@ -16,9 +13,9 @@ let options = {
 }
 export default function UploadImg({ navigation }) {
     // const [imgUrl,setImgUrl]=React.useState('')
-    const { post, setPost, imgUrl, setImgUrl } = usePostContext()
     const [isloading, setIsLoading] = React.useState(false)
     const [isDisable, setIsDisable] = React.useState(false)
+    const [isImageUploaded, setImageUploaded] = React.useState(false)
     const [newPost, setNewPost] = React.useState(null)
     const [imgUri, setImgUri] = useState(null);
 
@@ -56,8 +53,10 @@ export default function UploadImg({ navigation }) {
             setNewPost({ url, imgName, propertyStatus: 'avialable' })
             setIsLoading(false)
             setIsDisable(false)
-            // console.log(newPost)
-        } catch { (error) => alert(error) }
+            setImageUploaded(true)
+        } catch { (error) => alert(error)
+        setImageUploaded(false)
+        }
     }
     return (
         <ScrollView>
@@ -88,7 +87,7 @@ export default function UploadImg({ navigation }) {
                         </View>
 
 
-                        <Form setNewPost={setNewPost} newPost={newPost} />
+                        <Form setNewPost={setNewPost} newPost={newPost} isImageUploaded={isImageUploaded} />
 
                     </View>
 

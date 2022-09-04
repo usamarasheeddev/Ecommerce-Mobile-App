@@ -5,9 +5,6 @@ import { usePostContext } from '../../../contexts/PostContext'
 import { styles } from './styles'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import { useAuthContext } from '../../../contexts/AuthContext';
-import auth from "@react-native-firebase/auth"
-import firestore from '@react-native-firebase/firestore';
-import { useFavuriteItemsContext } from '../../../contexts/FavuriteItemsContext';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 

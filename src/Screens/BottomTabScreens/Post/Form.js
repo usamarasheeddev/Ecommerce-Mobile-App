@@ -7,12 +7,12 @@ import { usePostContext } from '../../../contexts/PostContext'
 import { v4 as uuid } from 'uuid';
 import firestore from '@react-native-firebase/firestore';
 // import firebase from '@react-native-firebase/app';
-
-export default function Form({ navigation, setNewPost, newPost }) {
+import auth from '@react-native-firebase/auth'
+export default function Form({ navigation, setNewPost, newPost, isImageUploaded }) {
     const { post, setPost, imgUrl } = usePostContext()
     const postCreds = {
         email: '', title: '', contactNo: '', city: '', address: '',
-        area: '', rooms: '', bath: '', kitchen: '', discription: '',price:''
+        area: '', rooms: '', bath: '', kitchen: '', discription: '', price: ''
     }
 
 
@@ -48,7 +48,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
         rooms: Yup.number().required('Rooms required!'),
         bath: Yup.number().required('Bath required!'),
         price: Yup.number().required('Price required!'),
-        kitchen: Yup.number().required('Kitchen required!'),
+        // kitchen: Yup.number().required('Kitchen required!'),
     })
 
 
@@ -58,19 +58,15 @@ export default function Form({ navigation, setNewPost, newPost }) {
         <Formik
             initialValues={postCreds} validationSchema={validationSchema}
             onSubmit={(values, formikActions) => {
-
-                // setImgUrl(s=>({...s,values}))
                 setNewPost(s => ({ ...s, ...values }))
-                // setNewPost({ newPost, ...values })
-                setPost(s => ([...s, {newPost, ...values,isLiked:false}]))
-                // console.log(newPost)
-                uploadToFirebase({newPost, ...values,isLiked:false})
+                setPost(s => ([...s, { newPost, ...values, isLiked: false, userId: auth().currentUser.uid }]))
+                uploadToFirebase({ newPost, ...values, isLiked: false, userId: auth().currentUser.uid })
                 formikActions.resetForm()
 
                 // formikActions.setSubmitting(false)
             }}
         >
-            {({ handleChange, touched, handleBlur, isSubmitting, handleSubmit, values, errors }) => {
+            {({ handleChange, touched, handleBlur, handleSubmit, values, errors }) => {
 
                 return <>
 
@@ -200,7 +196,7 @@ export default function Form({ navigation, setNewPost, newPost }) {
 
 
                         <TouchableOpacity style={{ backgroundColor: 'skyblue', width: 320, borderRadius: 5 }}
-                            onPress={handleSubmit}
+                            onPress={handleSubmit} disabled={!isImageUploaded}
                         >
                             <Text style={{ textAlign: 'center', padding: 5, backgroundColor: '#38b000', color: 'white' }}>
                                 Post
