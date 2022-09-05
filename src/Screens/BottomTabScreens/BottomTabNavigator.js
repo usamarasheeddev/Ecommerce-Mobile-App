@@ -26,7 +26,7 @@ export default function BottomTabScreen({ navigation }) {
 
 
     return (
-        <Tab.Navigator initialRouteName='Account'
+        <Tab.Navigator initialRouteName='Home'
         
             screenOptions={{
                 //bottom tab styling

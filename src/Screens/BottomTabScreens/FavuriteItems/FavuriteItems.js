@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, TouchableWithoutFeedback, Image } from 'react-native'
 import React from 'react'
 import { usePostContext } from '../../../contexts/PostContext'
+import { useFavuriteItemsContext } from '../../../contexts/FavuriteItemsContext'
 import { styles } from '../../Frontend/Home/styles'
 import { IconButton, MD3Colors } from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
@@ -11,14 +12,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function FavuriteItems({ navigation }) {
   // const { products, setProducts } = useProductsContext()
+  const { unLikePost } = useFavuriteItemsContext()
   const { post, setPost } = usePostContext()
 
   const handleFavurite = (id) => {
     setPost(
       post.map((item) => item.id == id ? { ...item, isLiked: !item.isLiked } : item)
     )
-    // addFavuriteItem(id)
-    getFromDb()
+    unLikePost(id)
+    // getFromDb()
 
   }
 
@@ -51,7 +53,7 @@ export default function FavuriteItems({ navigation }) {
   return (
     <ScrollView>
       {post.filter(item => item.isLiked == true).length == 0 ?
-        < Text onPress={() => getFromDb()} style={{
+        < Text  style={{
           textAlign: 'center', fontWeight: 'bold',
           marginTop: 350
         }}> No item found  </Text >
@@ -67,7 +69,7 @@ export default function FavuriteItems({ navigation }) {
                   icon={!item.isLiked ? "heart-outline" : "heart"}
                   iconColor={MD3Colors.error50}
                   size={20}
-                  onPress={() => addFavuriteItem(item.id)}
+                  onPress={() => handleFavurite(item.id)}
                   style={{ position: 'absolute', zIndex: 1, top: -5, left: 105 }}
                 />
                 {/* //PRODUCT iMAGE */}
