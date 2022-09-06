@@ -1,7 +1,6 @@
 import React, { useContext, useState, createContext } from 'react'
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage'
-import auth from '@react-native-firebase/auth'
 
 const PostsContext = createContext()
 export default function PostContextProvider({ children }) {
@@ -52,24 +51,7 @@ export default function PostContextProvider({ children }) {
             .catch((error) => { console.log("Error removing document:", error) })
     }
 
-    //Get Liked posts
-
-    //Get favurite Items
-    // let likeArr = []
-    // const getFromDb = async () => {
-    //     await firestore().collection('favuriteItems')
-    //         .doc(auth().currentUser.uid)
-    //         .collection('likedPosts').get().then((docs) => {
-    //             docs.forEach((doc) => { likeArr.push({ ...doc.data(), id: doc.id }) })
-    //         })
-
-    //         console.log(likeArr)
-    //     likeArr.forEach(doc => {
-    //         setPost(
-    //             post.map((item) => item.id == doc.id ? { ...item,isLiked: doc.isLiked } : item)
-    //          )
-    //     })
-    // }
+    
 
 
     return (

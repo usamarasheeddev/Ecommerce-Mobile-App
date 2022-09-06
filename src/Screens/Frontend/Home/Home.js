@@ -21,7 +21,7 @@ export default function Home({ navigation }) {
 
   React.useEffect(() => {
     getFromDb()
-  }, [isLoadingPost])
+  }, [isLoadingPost, isAuthenticated])
 
 
   //SET FAVURITE ITEM
@@ -35,7 +35,7 @@ export default function Home({ navigation }) {
   }
 
 
-//Getting liked post from db
+  //Getting liked post from db
   let likeArr = []
   const getFromDb = async () => {
     await firestore().collection('favuriteItems')
@@ -44,7 +44,7 @@ export default function Home({ navigation }) {
         docs.forEach((doc) => { likeArr.push({ ...doc.data(), id: doc.id }) })
       })
 
-      //setting liked items to post context
+    //setting liked items to post context
     likeArr.forEach(doc => {
       setPost(
         post.map((item) => item.id == doc.id ? { ...item, isLiked: doc.isLiked } : item)
@@ -112,13 +112,18 @@ export default function Home({ navigation }) {
 
 
                     <View style={[styles.box, styles.shadowProp]}>
-                      <IconButton
-                        icon={!item.isLiked ? "heart-outline" : "heart"}
-                        iconColor={MD3Colors.error50}
-                        size={20}
-                        onPress={() => handleFavurite(item)}
-                        style={{ position: 'absolute', zIndex: 1, top: -5, left: 105 }}
-                      />
+
+                      {/* if authenticated then show like button */}
+                      {isAuthenticated ?
+                        <IconButton
+                          icon={!item.isLiked ? "heart-outline" : "heart"}
+                          iconColor={MD3Colors.error50}
+                          size={20}
+                          onPress={() => handleFavurite(item)}
+                          style={{ position: 'absolute', zIndex: 1, top: -5, left: 110 }}
+                        />
+                        : null
+                      }
                       {/* //PRODUCT iMAGE */}
                       <View style={{ flexDirection: 'row', alignItems: "center" }}>
                         <Image

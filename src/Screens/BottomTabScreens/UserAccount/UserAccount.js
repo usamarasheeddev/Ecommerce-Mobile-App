@@ -53,11 +53,11 @@ export default function UserAccount({ navigation }) {
             <View style={{height:20}}> 
               
             </View>
-            {/* <TouchableOpacity onPress={() => handleLogout()} style={{ backgroundColor: '#a4161a', marginTop: 10 }}>
+            <TouchableOpacity onPress={() => handleLogout()} style={{ backgroundColor: '#a4161a', marginTop: 10 }}>
 
               <Text style={{ textAlign: 'center', color: 'white', paddingVertical: 10 }}>
                 Logout</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
 
 
