@@ -15,7 +15,7 @@ export default function UserPosts() {
     return (
         <View>
             {post.filter((doc) => doc.userId == userId).length == 0 ?
-                <Text style={{ fontWeight: 'bold', marginTop: 200 }}
+                <Text style={{ fontWeight: 'bold', marginTop: 150 }}
                 >No post yet</Text>
 
 

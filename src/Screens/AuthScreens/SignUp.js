@@ -18,25 +18,26 @@ export default function SignUp({ navigation }) {
   const [isLoading, setIsLoading] = React.useState(false)
 
   const userCreds = {
-    email: '', password: '', username: ''
+    email: '', password: '', username: '', contactNo: ''
   }
 
   const validationSchema = Yup.object({
     email: Yup.string().email('Invalid Email').required('Email required!'),
     password: Yup.string().trim().min(8, "Invalid Password").required('Password required'),
-    username: Yup.string().trim().min(4, 'Invalid Username').required('Username required!')
+    username: Yup.string().trim().min(4, 'Invalid Username').required('Username required!'),
+    contactNo: Yup.number().required("Phone number required!")
 
   })
 
   const handleSignUp = (values) => {
     setIsLoading(true)
-    const { email, password,username } = values
+    const { email, password, username,contactNo } = values
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user
         // dispatch({ type: "LOGIN", payload: { user } })
-        createUserProfile(user,username)
+        createUserProfile(user, username, contactNo)
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -55,10 +56,12 @@ export default function SignUp({ navigation }) {
   }
 
 
-  const createUserProfile = async (user,username) => {
+  const createUserProfile = async (user, username, contactNo) => {
     let formData = {
       userName: username,
       email: user.email,
+      contactNo: contactNo,
+      profileUrl:'',
       uid: user.uid,
       dateCreated: firebase.firestore.FieldValue.serverTimestamp()
     }
@@ -109,6 +112,7 @@ export default function SignUp({ navigation }) {
                   onChangeText={handleChange('username')}
                   onBlur={handleBlur('username')}
                   value={values.username}
+                  autoCapitalize="word"
                   // keyboardType='email-address'
                   error={touched.username && errors.username}
 
@@ -122,6 +126,16 @@ export default function SignUp({ navigation }) {
                   keyboardType='email-address'
                   autoCapitalize='none'
                   error={touched.email && errors.email}
+
+                />
+                <Input
+                  placeholdero='contactNo'
+                  label='Contact Number'
+                  onChangeText={handleChange('contactNo')}
+                  onBlur={handleBlur('contactNo')}
+                  value={values.contactNo}
+                  keyboardType='numeric'
+                  error={touched.contactNo && errors.contactNo}
 
                 />
                 <Input

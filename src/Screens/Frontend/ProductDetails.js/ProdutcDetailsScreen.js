@@ -26,7 +26,7 @@ export default function ProdutcDetailsScreen({ navigation, route }) {
                                 source={{
                                     uri: item.newPost.url
                                 }}
-                                style={{ flex: 1, width: "98%", borderRadius: 20, height: 270, resizeMode: 'contain', marginTop: 2, resizeMode: 'contain' }}
+                                style={{ flex: 1, width: "98%", borderRadius: 20, height: 270, marginTop: 2, resizeMode: 'contain' }}
 
                             />
                             <View style={styles.textBox}>

@@ -10,28 +10,24 @@ import Heart from 'react-native-vector-icons/SimpleLineIcons'
 import Search from 'react-native-vector-icons/Ionicons'
 import Plus from 'react-native-vector-icons/AntDesign'
 import User from 'react-native-vector-icons/AntDesign'
-import { IconButton, MD3Colors } from 'react-native-paper';
-import auth from "@react-native-firebase/auth"
-import { useAuthContext } from '../../contexts/AuthContext';
+
 import UserScreenNavigator from './UserAccount/UserScreenNavigator';
 import FavuriteItemsNavigator from './FavuriteItems/FavuriteItemsNavigator';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabScreen({ navigation }) {
-    const { isAuthenticated, dispatch } = useAuthContext()
 
 
 
 
 
     return (
-        <Tab.Navigator initialRouteName='Home'
+        <Tab.Navigator initialRouteName='Account'
         
             screenOptions={{
                 //bottom tab styling
                 tabBarStyle: {
-                    // backgroundColor:'black',
                     position: "absolute",
                     bottom: 15,
                     height: 60,

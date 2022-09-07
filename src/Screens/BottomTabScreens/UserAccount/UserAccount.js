@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView ,Bu} from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView, StyleSheet } from 'react-native'
 import auth from '@react-native-firebase/auth';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import firestore from "@react-native-firebase/firestore"
 import UserPosts from './UserPosts';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import UserProfile from './UserProfile';
 
 
 export default function UserAccount({ navigation }) {
@@ -49,13 +50,16 @@ export default function UserAccount({ navigation }) {
 
 
         : <View style={{ padding: 10 }}>
-          <View>
-            <View style={{height:20}}> 
-              
-            </View>
-            <TouchableOpacity onPress={() => handleLogout()} style={{ backgroundColor: '#a4161a', marginTop: 10 }}>
+          <View style={styles.container} >
 
-              <Text style={{ textAlign: 'center', color: 'white', paddingVertical: 10 }}>
+            <UserProfile />
+
+            <View style={{ height: 20 }}>
+
+            </View>
+            <TouchableOpacity onPress={() => handleLogout()} style={styles.logout}>
+
+              <Text style={{ textAlign: 'center', color: 'white', paddingVertical: 5 }}>
                 Logout</Text>
             </TouchableOpacity>
           </View>
@@ -63,7 +67,7 @@ export default function UserAccount({ navigation }) {
 
           {/* USER POSTS USER POSTS */}
           <Text style={{
-            marginTop: 25, textAlign: 'center', color: 'black', fontSize: 20,
+            marginTop: 10, textAlign: 'center', color: 'black', fontSize: 20,
             fontWeight: 'bold', borderBottomWidth: 1, borderColor: '#caceb7', padding: 5, marginBottom: 10
           }} >Posts</Text>
           <View style={{ alignItems: 'center' }}>
@@ -83,3 +87,14 @@ export default function UserAccount({ navigation }) {
       }</>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    
+  },
+  logout: {
+    backgroundColor: '#a4161a',  width:70,
+    position:'absolute',right:2
+  }
+})
